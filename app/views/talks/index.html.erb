@@ -5,8 +5,10 @@
 <table>
   <thead>
     <tr>
+      <th>Speaker</th>
       <th>Title</th>
       <th>Description</th>
+      <th>Duration</th>
       <th colspan="2"></th>
     </tr>
   </thead>
@@ -14,8 +16,10 @@
   <tbody>
     <% @talks.each do |talk| %>
       <tr>
+        <td><%= talk.speaker %></td>
         <td><%= talk.title %></td>
         <td><%= talk.description %></td>
+        <td><%= talk.duration %></td>
         <td><%= link_to 'Show', talk %></td>
       </tr>
     <% end %>

@@ -12,6 +12,11 @@
   <% end %>
 
   <div class="field">
+    <%= f.label :speaker %><br>
+    <%= f.text_field :speaker, required: true %>
+  </div>
+  <hr>
+  <div class="field">
     <%= f.label :title %><br>
     <%= f.text_field :title, required: true %>
   </div>
@@ -20,12 +25,8 @@
     <%= f.text_area :description, required: true %>
   </div>
   <div class="field">
-    <%= f.label :duration %><br>
-    <%= f.number_field :duration, max: 30, required: true %>
-  </div>
-  <div class="field">
-    <%= f.label :speaker %><br>
-    <%= f.text_field :speaker, required: true %>
+    <%= f.label :duration %> (30min max)<br>
+    <%= f.number_field :duration, value: 30, max: 30, required: true %>
   </div>
   <div class="actions">
     <%= f.submit %>
