@@ -5,22 +5,27 @@
 <table>
   <thead>
     <tr>
-      <th>Speaker</th>
       <th>Title</th>
       <th>Description</th>
       <th>Duration</th>
-      <th colspan="2"></th>
+      <th>Speaker</th>
     </tr>
   </thead>
 
   <tbody>
     <% @talks.each do |talk| %>
       <tr>
-        <td><%= talk.speaker %></td>
         <td><%= talk.title %></td>
         <td><%= talk.description %></td>
         <td><%= talk.duration %></td>
-        <td><%= link_to 'Show', talk %></td>
+        <td><%= talk.speaker %></td>
+        <td><button type="button" name="button"> <%= link_to 'Show', talk %></button></td>
+        <td><button><%= link_to 'Edit', talk_path(talk.id) %></button></td>
+        <td><button>
+          <%= link_to 'Delete', talk_path(talk),
+          method: :delete,
+          data: { confirm: 'Do you really want to delete?' } %>
+        </button></td>
       </tr>
     <% end %>
   </tbody>
@@ -28,4 +33,4 @@
 
 <br>
 
-<%= link_to 'New Talk', new_talk_path %>
+<button><%= link_to 'New Talk', new_talk_path %></button>

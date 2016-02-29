@@ -19,6 +19,8 @@ class TalksController < ApplicationController
 
   # GET /talks/1/edit
   def edit
+    @talks = Talk.all
+    @talk = @talks.find(params[:id])
   end
 
   # POST /talks
@@ -69,6 +71,6 @@ class TalksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def talk_params
-      params.require(:talk).permit(:title, :description, :speaker, :duration)
+      params.require(:talk).permit(:title, :description, :duration, :speaker)
     end
 end
