@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
   # You can have the root of your site routed with "root"
-  root 'talks#new'
+  root 'talks#index'
 
-  resources :talks, except: [:destroy, :edit]
+  resources :talks
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
