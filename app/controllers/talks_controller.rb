@@ -26,17 +26,10 @@ class TalksController < ApplicationController
   # POST /talks
   # POST /talks.json
   def create
-    @talk = Talk.new(talk_params)
+    Talk.create(talk_params)
+		flash[:success] = "You have added a new talk. Good for you!!"
+		redirect_to talks_path
 
-    respond_to do |format|
-      if @talk.save
-        format.html { redirect_to @talk, notice: 'Talk was successfully created.' }
-        format.json { render :show, status: :created, location: @talk }
-      else
-        format.html { render :new }
-        format.json { render json: @talk.errors, status: :unprocessable_entity }
-      end
-    end
   end
 
   # PATCH/PUT /talks/1
