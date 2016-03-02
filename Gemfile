@@ -23,10 +23,9 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem "therubyracer"
-
 gem "less-rails"
-
 gem "twitter-bootstrap-rails"
+gem "devise"
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
