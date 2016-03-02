@@ -7,7 +7,18 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-<%= nav_bar brand: "Porto Codes", brand_link: root_path  %>
+  <nav>
+      <%= nav_bar brand: "Porto Codes", brand_link: root_path  %>
+      <% if user_signed_in? %>
+      <p>
+        Hello, <%= current_user.name %> - <%= link_to "Sign Out", destroy_user_session_path, :method =>  'delete' %>
+        <% else %>
+        <%= link_to "Sign In", new_user_session_path %>
+        <%= link_to "Sign Out", new_user_registration_path %>
+      </p>
+      <% end %>
+  </nav>
+
 
 <div id="flash">
   <% flash.each do |key, value| %>
@@ -18,8 +29,6 @@
 <div class="container">
   <div class="row">
     <div class="span12">
-      <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
       <%= yield %>
     </div>
   </div>
