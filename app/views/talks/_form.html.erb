@@ -1,33 +1,55 @@
-<%= form_for(@talk) do |f| %>
-  <% if @talk.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@talk.errors.count, "error") %> prohibited this talk from being saved:</h2>
+<%= form_for @talk, :html => { :class => "form-horizontal talk" } do |f| %>
 
-      <ul>
-      <% @talk.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+  <% if @talk.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@talk.errors.count, "error") %> prohibited this talk from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @talk.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :title %><br>
-    <%= f.text_field :title, required: true %>
+  <div class="form-group">
+    <%= f.label :title, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :title, :class => 'form-control', required: true %>
+    </div>
+    <%=f.error_span(:title) %>
   </div>
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_area :description, required: true %>
+  <div class="form-group">
+    <%= f.label :description, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :description, :class => 'form-control', required: true %>
+    </div>
+    <%=f.error_span(:description) %>
   </div>
-  <div class="field">
-    <%= f.label :duration %><br>
-    <%= f.number_field :duration, max: 30, required: true %>
+  <div class="form-group">
+    <%= f.label :duration, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.number_field :duration, :class => 'form-control', max: 30, required: true %>
+    </div>
+    <%=f.error_span(:duration) %>
   </div>
-  <div class="field">
-    <%= f.label :speaker %><br>
-    <%= f.text_field :speaker, required: true %>
+  <div class="form-group">
+    <%= f.label :speaker, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :speaker, :class => 'form-control', required: true %>
+    </div>
+    <%=f.error_span(:speaker) %>
   </div>
-  <div class="actions">
-    <%= f.submit %>
+
+  <div class="form-group">
+    <div class="col-lg-offset-2 col-lg-10">
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                talks_path, :class => 'btn btn-default' %>
+    </div>
   </div>
+
 <% end %>
