@@ -1,4 +1,5 @@
 class TalksController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_talk, only: [:show, :edit, :update, :destroy]
 
   # GET /talks
@@ -26,7 +27,8 @@ class TalksController < ApplicationController
   # POST /talks
   # POST /talks.json
   def create
-    Talk.create(talk_params)
+    @user = current_user
+    @talk = @user.talks.create(talk_params)
 		flash[:success] = "You have added a new talk. Good for you!!"
 		redirect_to talks_path
 
