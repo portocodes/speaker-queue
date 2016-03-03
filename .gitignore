@@ -18,3 +18,4 @@
 
 # Ignore ENV file with env_variables
 *.env
+/*.env
