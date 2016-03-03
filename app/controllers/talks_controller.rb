@@ -31,7 +31,7 @@ class TalksController < ApplicationController
     @talk = @user.talks.new(talk_params)
     respond_to do |format|
       if @talk.save
-        TalkMailer.talk_created(@user).deliver
+        TalkMailer.talk_created(@user).deliver_later
         format.html { redirect_to talks_path, notice:  "You have added a new talk. Good for you!!" }
         format.json { render :show, status: :created, location: @talk }
       else
