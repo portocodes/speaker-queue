@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-
+gem 'dotenv-rails'
 gem 'mysql2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -26,7 +26,7 @@ gem "therubyracer"
 gem "less-rails"
 gem "twitter-bootstrap-rails"
 gem "devise"
-gem 'dotenv-rails'
+
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
