@@ -1,5 +1,6 @@
 ## README
 
+[![Code Climate](https://codeclimate.com/github/ricardojusto/speaker-queue/badges/gpa.svg)](https://codeclimate.com/github/ricardojusto/speaker-queue)
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
