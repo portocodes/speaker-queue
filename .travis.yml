@@ -1,6 +1,12 @@
 language: ruby
 rvm:
-  - 2.2.2
+- 2.2.2
 cache: bundler
 script:
-  - bundle exec rake db:test:prepare
+- bundle exec rake db:test:prepare
+addons:
+  code_climate:
+    repo_token: ENV['CODECLIMATE_REPO_TOKEN']
+notifications:
+  slack:
+    secure: cdfHpIZiE+lBeiPFXXOwIbX4kzCrDr2Jx2hYOJ6PHWLxrL/bE8b1UwDAklbWsW5xt7Uz73jDnD54RVw5yFr7MYpuBCtWLIz/HMHRtBoCmtEUj8ULcw007+zB74mBkgXbWoPDGuRspY+4Nz4jF5OI9LZN8CTqs3wyoTQws6dJcUlrMHWjYAGI6fbmXfbc/rL+rfQ+moL3XMR7bTCvUjN83sf2dwgppX0n4bZe9xo+++GFHwbFEx/Y4WrSi1euvwVHbQq3MDMNKiUDgdGtvz4ytcQPinh/1Jv3/WJBvyoND/bpWDX4sIL7y30nDIjDsXhlMikEfuPHhlJEnv+ADMhTrRf/gRRAXUi21e8HSjy5MNdPjr37gl/bTXCYVh7ZTHEcM0YJFaeqIMM50gjI6WTmARPqC8T/tXpTpliBgJ/zOCLVFxhYnLpX6iXfdqg2EuVrEfCmbB/ef+CcjIHEWzBaWcw/6QiRxkHxoVsoRCCIRLmYNUkOANslJiG5ZtZGvNr7CLhlxWZGUASzHRHw0a8I+7WJrX3BNkCtj6KrMOzMwgzkjPYB4Ja+JSYWvHcH6z13UwlT5SG0so8KQLg5ALj2A43PD1Jiy09YAJq8kTpgkT8Pr7edjUbxj0d6GBVjp3mNyJFoMEIVI72UNH4yfuce4SdR/6QP22G3Uk1ICpfNBpc=

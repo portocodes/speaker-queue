@@ -20,6 +20,7 @@ group :development do
 end
 
 group :development, :test do
+  gem "codeclimate-test-reporter"
   gem 'sqlite3'
   gem 'rake'
   gem 'byebug'
