@@ -187,6 +187,7 @@ DEPENDENCIES
   less-rails
   mysql2
   rails (= 4.2.3)
+  rake
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   spring
