@@ -1,4 +1,6 @@
-  language: ruby
-  rvm:
-    - 2.2.2
-  cache: bundler
+language: ruby
+rvm:
+  - 2.2.2
+cache: bundler
+script:
+  - bundle exec rake db:test:prepare
