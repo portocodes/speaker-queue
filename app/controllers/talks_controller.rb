@@ -1,4 +1,5 @@
 class TalksController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_talk, only: [:show, :edit, :update, :destroy]
 
   # GET /talks
@@ -26,11 +27,12 @@ class TalksController < ApplicationController
   # POST /talks
   # POST /talks.json
   def create
-    @talk = Talk.new(talk_params)
-
+    @user = current_user
+    @talk = @user.talks.new(talk_params)
     respond_to do |format|
       if @talk.save
-        format.html { redirect_to @talk, notice: 'Talk was successfully created.' }
+        TalkMailer.talk_created(@user).deliver_later
+        format.html { redirect_to talks_path, notice:  "You have added a new talk. Good for you!!" }
         format.json { render :show, status: :created, location: @talk }
       else
         format.html { render :new }
