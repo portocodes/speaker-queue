@@ -1,39 +1,35 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>SpeakerQueue</title>
+  <title>Porto Codes' Speaker Queue</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <nav>
-      <%= nav_bar brand: "Porto Codes", brand_link: root_path  %>
-      <% if user_signed_in? %>
-      <p>
-        Hello, <%= current_user.name %> - <%= link_to "Sign Out", destroy_user_session_path, :method =>  'delete' %>
-        <% else %>
-        <%= link_to "Sign In", new_user_session_path %>
-        <%= link_to "Sign Out", new_user_registration_path %>
+    <%= nav_bar brand: "Porto Codes", brand_link: root_path do %>
+      <p class="navbar-text navbar-right">
+        <% if user_signed_in? %>
+          Hello, <%= current_user.name %> - <%= link_to "Sign Out", destroy_user_session_path, :method =>  'delete' %>
+          <% else %>
+          <%= link_to "Sign In", new_user_session_path %>
+          <%= link_to "Sign Up", new_user_registration_path %>
+        <% end %>
       </p>
-      <% end %>
-  </nav>
+    <% end %>
 
+  <div id="flash">
+    <% flash.each do |key, value| %>
+      <div class="flash <%= key %>"><%= value %></div>
+    <% end %>
+  </div>
 
-<div id="flash">
-  <% flash.each do |key, value| %>
-    <div class="flash <%= key %>"><%= value %></div>
-  <% end %>
-</div>
-
-<div class="container">
-  <div class="row">
-    <div class="span12">
-      <%= yield %>
+  <div class="container">
+    <div class="row">
+      <div class="span12">
+        <%= yield %>
+      </div>
     </div>
   </div>
-</div>
-
-
 </body>
 </html>
