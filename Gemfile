@@ -14,7 +14,8 @@ gem 'therubyracer'
 gem 'less-rails'
 gem 'twitter-bootstrap-rails'
 gem 'devise'
-gem 'state_machine'
+gem 'state_machines'
+gem 'state_machines-activerecord'
 
 group :development do
   gem 'web-console', '~> 2.0'
