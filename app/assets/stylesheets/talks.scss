@@ -1,3 +1,22 @@
 // Place all the styles related to the Talks controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.status {
+  padding: 3px;
+  font-weight: bold;
+  min-width: 90px;
+  text-transform: capitalize;
+  &.pending{
+    background-color: #ff9900;
+  }
+  &.approved {
+    background-color: #99e600;
+  }
+  &.rejected {
+    background-color: #ff0000;
+  }
+  &.delayed {
+    background-color: #6699ff;
+  }
+}

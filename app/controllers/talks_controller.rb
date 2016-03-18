@@ -2,6 +2,24 @@ class TalksController < ApplicationController
   before_action :authenticate_user!
   before_action :set_talk, only: [:show, :edit, :update, :destroy]
 
+  def approve
+    @talk = Talk.find(params[:id])
+    @talk.approve
+    redirect_to talks_path
+  end
+
+  def reject
+    @talk = Talk.find(params[:id])
+    @talk.reject
+    redirect_to talks_path
+  end
+
+  def delay
+    @talk = Talk.find(params[:id])
+    @talk.delay
+    redirect_to talks_path
+  end
+
   # GET /talks
   # GET /talks.json
   def index
@@ -73,6 +91,6 @@ class TalksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def talk_params
-      params.require(:talk).permit(:title, :description, :duration, :speaker)
+      params.require(:talk).permit(:title, :description, :duration, :speaker, :state)
     end
 end
