@@ -7,6 +7,7 @@
     <tr>
       <th><%= model_class.human_attribute_name(:title) %></th>
       <th><%= model_class.human_attribute_name(:description) %></th>
+      <th><%= model_class.human_attribute_name(:tag_list) %></th>
       <th><%= model_class.human_attribute_name(:duration) %></th>
       <th><%= model_class.human_attribute_name(:speaker) %></th>
       <th><%= model_class.human_attribute_name(:status) %></th>
@@ -18,6 +19,7 @@
       <tr>
         <td><%= talk.title %></td>
         <td><%= talk.description %></td>
+        <td><%= talk.tag_list %></td>
         <td><%= talk.duration %></td>
         <td><%= talk.speaker %></td>
         <td><span class="btn status <%= talk.state %>"><%= talk.state %></span></td>

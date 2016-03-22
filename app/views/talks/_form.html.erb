@@ -30,6 +30,13 @@
     <%=f.error_span(:description) %>
   </div>
   <div class="form-group">
+    <%= f.label :tag_list, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.text_field :tag_list, :class => 'form-control', required: true %>
+    </div>
+    <%=f.error_span(:tag_list) %>
+  </div>
+  <div class="form-group">
     <%= f.label :duration, :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
       <%= f.number_field :duration, :class => 'form-control', max: 30, required: true %>

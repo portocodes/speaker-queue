@@ -1,5 +1,6 @@
 class Talk < ActiveRecord::Base
   belongs_to :user
+  acts_as_taggable
 
   state_machine :state, :initial => :pending do
     event :approve do
