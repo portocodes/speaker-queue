@@ -23,7 +23,11 @@ class TalksController < ApplicationController
   # GET /talks
   # GET /talks.json
   def index
-    @talks = Talk.all
+    if params[:tag]
+      @talks = Talk.tagged_with(params[:tag])
+    else
+      @talks = Talk.all
+    end
   end
 
   # GET /talks/1

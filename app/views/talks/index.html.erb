@@ -1,5 +1,8 @@
 <%- model_class = Talk %>
-<div class="page-header">
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="page-header">
   <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
 </div>
 <table class="table table-striped">
@@ -19,7 +22,7 @@
       <tr>
         <td><%= talk.title %></td>
         <td><%= talk.description %></td>
-        <td><%= talk.tag_list %></td>
+        <td><span class="tag-color"><%= raw talk.tag_list.map { |t| link_to t, tag_path(t) }.join(', ') %></span></td>
         <td><%= talk.duration %></td>
         <td><%= talk.speaker %></td>
         <td><span class="btn status <%= talk.state %>"><%= talk.state %></span></td>
@@ -51,3 +54,13 @@
 <%= link_to t('.new', :default => t("helpers.links.new")),
             new_talk_path,
             :class => 'btn btn-primary' %>
+
+<div id="tag_cloud">
+  <% tag_cloud Talk.tag_counts, %w[s m l] do |tag, css_class| %>
+    <%= link_to tag.name, tag_path(tag.name), class: css_class %>
+  <% end %>
+</div>
+
+    </div>
+  </div>
+</div>

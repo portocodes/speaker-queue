@@ -1,5 +1,11 @@
 <%- model_class = Talk -%>
-<div class="page-header">
-  <h1><%=t '.title', :default => [:'helpers.titles.edit', 'Edit %{model}'], :model => model_class.model_name.human.titleize %></h1>
+<div class="container">
+  <div class="row">
+    <div class="page-header">
+      <h1>
+        <%=t '.title', :default => [:'helpers.titles.edit', 'New %{model}'], :model => model_class.model_name.human.titleize %>
+      </h1>
+    </div>
+    <%= render :partial => 'form' %>
+  </div>
 </div>
-<%= render :partial => 'form' %>
