@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'submit', to: 'talks#submit'
   get 'tags/:tag', to: 'talks#index', as: :tag
   devise_for :users, controllers: { registrations: "registrations" }
 
@@ -10,6 +11,6 @@ Rails.application.routes.draw do
     end
   end
 
-  root 'home#index'
+  root 'talks#index'
 
 end
