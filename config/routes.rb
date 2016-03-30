@@ -1,7 +1,14 @@
 Rails.application.routes.draw do
-  get 'submit', to: 'talks#submit'
-  get 'tags/:tag', to: 'talks#index', as: :tag
+
+  devise_scope :user do
+    get 'submit', to: 'registrations#new', as: :submit
+  end
+
   devise_for :users, controllers: { registrations: "registrations" }
+
+
+
+  get 'tags/:tag', to: 'talks#index', as: :tag
 
   resources :talks do
     member do
