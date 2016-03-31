@@ -29,7 +29,7 @@
         <%= f.password_field :password_confirmation, autocomplete: "off" %>
       </div>
 
-      <%= f.fields_for :talks do |u| %>
+      <%= f.fields_for :talk do |u| %>
 
         <div class="form-group">
           <%= u.label :title, :class => 'control-label ' %>

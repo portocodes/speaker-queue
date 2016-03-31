@@ -1,7 +1,6 @@
 class Talk < ActiveRecord::Base
   belongs_to :user
   acts_as_taggable
-  accepts_nested_attributes_for :user
 
   state_machine :state, :initial => :pending do
     event :approve do
