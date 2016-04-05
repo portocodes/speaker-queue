@@ -23,15 +23,12 @@ class RegistrationsController < Devise::RegistrationsController
     respond_with self.resource
   end
 
-  def create
-    super
-  end
 
 
   private
   def sign_up_params
-    #allow = [:name, :email, :password, :password_confirmation, [talks_attributes: [:title, :description, :duration, :speaker, :state, :tag_list]]]
-    params.require(resource_name).permit! #(allow)
+    allow = [:name, :email, :password, :password_confirmation, talks_attributes: [:id, :title, :description, :duration, :speaker, :state, :tag_list, :_destroy]]
+    params.require(resource_name).permit(allow)
   end
   # def sign_up_params
   #   params.require(:user).permit! #(:name, :email, :password, :password_confirmation )
