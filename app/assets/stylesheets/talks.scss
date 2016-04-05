@@ -1,3 +1,47 @@
 // Place all the styles related to the Talks controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.status {
+  padding: 3px;
+  font-weight: bold;
+  min-width: 90px;
+  text-transform: capitalize;
+  &.pending{
+    background-color: #ff9900;
+  }
+  &.approved {
+    background-color: #99e600;
+  }
+  &.rejected {
+    background-color: #ff0000;
+  }
+  &.delayed {
+    background-color: #6699ff;
+  }
+}
+
+#tag_cloud {
+  margin-top: 10px;
+  line-height: 1.6em;
+  .s { font-size: 0.8em; }
+  .m { font-size: 1.2em; }
+  .l { font-size: 1.8em; }
+}
+
+.tag-color {
+  a {
+    padding: 2px;
+    background-color: #666666;
+    color: #ffffff;
+    font-weight: bold;
+    text-decoration: none;
+    font-size: 11px;
+  }
+  a:hover {
+    color: #000000;
+    font-weight: bold;
+    background-color: transparent;
+    text-decoration: none;
+  }
+}

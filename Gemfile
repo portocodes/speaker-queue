@@ -10,17 +10,20 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
-gem "therubyracer"
-gem "less-rails"
-gem "twitter-bootstrap-rails"
-gem "devise"
+gem 'therubyracer'
+gem 'less-rails'
+gem 'twitter-bootstrap-rails'
+gem 'devise'
+gem 'state_machines'
+gem 'state_machines-activerecord'
+gem 'acts-as-taggable-on', '~> 3.4'
 
 group :development do
   gem 'web-console', '~> 2.0'
 end
 
 group :development, :test do
-  gem "codeclimate-test-reporter"
+  gem 'codeclimate-test-reporter'
   gem 'sqlite3'
   gem 'rake'
   gem 'byebug'
