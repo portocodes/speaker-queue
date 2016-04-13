@@ -13,7 +13,6 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'therubyracer'
 gem 'less-rails'
 gem 'twitter-bootstrap-rails'
-gem 'devise'
 gem 'state_machines'
 gem 'state_machines-activerecord'
 gem 'acts-as-taggable-on', '~> 3.4'
