@@ -1,5 +1,5 @@
 class TalksController < ApplicationController
-  before_action :authenticate_user!, :except => [:index, :new, :submit ]
+
   before_action :set_talk, only: [:show, :edit, :update, :destroy]
 
   def approve
