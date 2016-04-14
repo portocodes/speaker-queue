@@ -1,0 +1,8 @@
+<h1>Log in</h1>
+<p>
+  <%= form_tag sessions_path do %>
+    <%= label_tag :email %>
+    <%= text_field_tag :email, params[:email], required: true %>
+    <%=  submit_tag "Log In" %>
+  <% end %>
+</p>
