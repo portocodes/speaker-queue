@@ -1,5 +1,5 @@
 class TalksController < ApplicationController
-
+  before_filter :authorize, only: [:edit, :update, :destroy]
   before_action :set_talk, only: [:show, :edit, :update, :destroy]
 
   def approve
@@ -95,6 +95,6 @@ class TalksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def talk_params
-      params.require(:talk).permit(:title, :description, :duration, :speaker, :state, :tag_list, user: [:name, :email, :password, :password_confirmation])
+      params.require(:talk).permit(:title, :description, :duration, :speaker, :state, :tag_list)
     end
 end
