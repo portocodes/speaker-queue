@@ -16,6 +16,7 @@ gem 'twitter-bootstrap-rails'
 gem 'state_machines'
 gem 'state_machines-activerecord'
 gem 'acts-as-taggable-on', '~> 3.4'
+gem 'cancancan', '~> 1.10'
 
 group :development do
   gem 'web-console', '~> 2.0'
