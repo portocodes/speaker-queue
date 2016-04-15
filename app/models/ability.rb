@@ -2,38 +2,20 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    user ||= User.new
-    alias_action :index, :show, :create, :update, :edit, :destroy, :to => :crud
 
-    if user.master?
-        master
-    elsif user.admin?
-        admin
-    elsif user.speaker?
-        speaker
-    else
-        guest
-    end
-
-    def master
+    if user.nil?
+        can [:read, :submit, :create], Talk
+        can [:read, :submit, :create], User
+    elsif user.role == "admin"
         can :manage, User
-        cannot :manage, Talk
-    end
-
-    def admin
-        can :manage, Talk
-        cannot :manage, User
-    end
-
-    def speaker
-        can :crud, Talk do |t|
-            t.user == current_user
-        end
-    end
-
-    def guest
         can :read, Talk
+    elsif user.role == "moderator"
+        can :manage, Talk
+    elsif user.role == "coder"
+        can [:read, :create], Talk
+        can [:update, :destroy ], Talk, :user_id => user.id
     end
+  end
 
     # Define abilities for the passed in user here. For example:
     #
@@ -61,5 +43,5 @@ class Ability
     #
     # See the wiki for details:
     # https://github.com/CanCanCommunity/cancancan/wiki/Defining-Abilities
-  end
+
 end

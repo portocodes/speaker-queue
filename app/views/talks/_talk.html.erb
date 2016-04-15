@@ -27,6 +27,7 @@
         <td><span class="btn status <%= talk.state %>"><%= talk.state %></span></td>
         <% if current_user %>
         <td>
+          <% if can? :read, Talk %>
           <%= link_to '<i class="fa fa-pencil-square-o"></i>'.html_safe,
                       edit_talk_path(talk), :class => 'btn btn-default btn-md',
                       :title => 'Edit', :rel => 'tooltip', "data-placement" => "left" %>
@@ -45,6 +46,7 @@
           <%= link_to '<i class="fa fa-clock-o fa-lg"></i>'.html_safe, delay_talk_path(talk), method: :put,
                       :class => 'btn btn-md btn-default',
                       :title => 'Delay', :rel => 'tooltip', "data-placement" => "right" %>
+          <% end %>
         </td>
         <% end %>
       </tr>
