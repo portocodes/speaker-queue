@@ -5,9 +5,9 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-User.create(name: "master", email: 'master@gmail.com', master: true )
-User.create(name: "admin", email: 'admin@gmail.com', admin: true )
-User.create(name: "user", email: 'user@gmail.com')
+User.create(name: "admin", email: 'admin@portocodes.com', role: 'admin')
+User.create(name: "moderator", email: 'moderator@portocodes.com', role: 'moderator' )
+User.create(name: "coder", email: 'coder@portocodes.com', role: 'coder')
 Talk.create(title:"Title 1", description:"Description 1", duration:"1", speaker:"One", state:"pending", tag_list:"ruby, javascript", user_id: 2)
 Talk.create(title:"Title 2", description:"Description 2", duration:"2", speaker:"Two", state:"pending", tag_list:"ruby, rails", user_id: 2)
 Talk.create(title:"Title 3", description:"Description 3", duration:"3", speaker:"Three", state:"pending", tag_list:"ruby, perl, elixir", user_id: 3)
