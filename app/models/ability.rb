@@ -2,7 +2,6 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-
     if user.nil?
         can [:read, :submit, :create], Talk
         can [:read, :submit, :create], User

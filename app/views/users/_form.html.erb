@@ -17,13 +17,14 @@
   </div>
   <div class="field">
     <%= f.label :email %><br>
-    <%= f.text_field :email %>
+    <%= f.email_field :email %>
   </div>
-
+  <% if can? :manage, User %>
   <div class="field">
     <%= f.label :role %><br>
     <%= f.collection_select :role, User::ROLES, :to_s, :humanize %>
   </div>
+  <% end %>
   <div class="actions">
     <%= f.submit %>
   </div>
