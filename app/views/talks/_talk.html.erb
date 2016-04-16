@@ -30,7 +30,6 @@
         </td>
         <td><%= talk.duration %></td>
         <td><%= talk.speaker %></td>
-
         <td><%= talk.date_event %></td>
         <td><span class="btn status <%= talk.state %>"><%= talk.state %></span></td>
         <% if current_user && (current_user.role == "moderator" || current_user.id == talk.user_id) %>
@@ -44,6 +43,7 @@
                       :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
                       :class => 'btn btn-md btn-danger',
                       :title => 'Delete', :rel => 'tooltip', "data-placement" => "right" %>
+          <% if can? :update_states, Talk %>
           <%= link_to '<i class="fa fa-check fa-lg"></i>'.html_safe, approve_talk_path(talk), method: :put,
                       :class => 'btn btn-md btn-default',
                       :title => 'Approve', :rel => 'tooltip', "data-placement" => "right" %>
@@ -53,6 +53,7 @@
           <%= link_to '<i class="fa fa-clock-o fa-lg"></i>'.html_safe, delay_talk_path(talk), method: :put,
                       :class => 'btn btn-md btn-default',
                       :title => 'Delay', :rel => 'tooltip', "data-placement" => "right" %>
+          <% end %>
         </td>
       <% end %>
       </tr>

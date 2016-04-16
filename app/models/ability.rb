@@ -8,6 +8,7 @@ class Ability
         can :manage, User
         can :read, Talk
     elsif user.role == "moderator"
+        can :update_states, Talk
         can :manage, Talk
     elsif user.role == "coder"
         can [:read, :create], Talk

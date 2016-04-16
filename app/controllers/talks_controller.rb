@@ -21,8 +21,6 @@ class TalksController < ApplicationController
     redirect_to talks_path
   end
 
-  # GET /talks
-  # GET /talks.json
   def index
     @users = User.all
     if params[:tag]
@@ -32,30 +30,28 @@ class TalksController < ApplicationController
     end
   end
 
-  # GET /talks/1
-  # GET /talks/1.json
   def show
   end
 
-  # GET /talks/new
   def new
     @talk = Talk.new
   end
 
-  # GET /talks/1/edit
   def edit
     @talks = Talk.all
-    @talk = @talks.find(params[:id])
+    if current_user.role == "coder" && @talk.state != "pending"
+      redirect_to root_path, :alert => "You are not authorized to perform that action."
+    else
+      @talk = @talks.find(params[:id])
+    end
   end
 
-  # POST /talks
-  # POST /talks.json
   def create
     @user = current_user
     @talk = @user.talks.new(talk_params)
     respond_to do |format|
       if @talk.save
-        TalkMailer.talk_created(@user).deliver_later
+        # TalkMailer.talk_created(@user).deliver_later
         format.html { redirect_to talks_path, notice:  "You have added a new talk. Good for you!!" }
         format.json { render :show, status: :created, location: @talk }
       else
@@ -65,12 +61,10 @@ class TalksController < ApplicationController
     end
   end
 
-  # PATCH/PUT /talks/1
-  # PATCH/PUT /talks/1.json
   def update
     respond_to do |format|
       if @talk.update(talk_params)
-        format.html { redirect_to @talk, notice: 'Talk was successfully updated.' }
+        format.html { redirect_to root_path, notice: 'Talk was successfully updated.' }
         format.json { render :show, status: :ok, location: @talk }
       else
         format.html { render :edit }
@@ -79,13 +73,15 @@ class TalksController < ApplicationController
     end
   end
 
-  # DELETE /talks/1
-  # DELETE /talks/1.json
   def destroy
-    @talk.destroy
-    respond_to do |format|
-      format.html { redirect_to talks_url, notice: 'Talk was successfully destroyed.' }
-      format.json { head :no_content }
+    if current_user.role == "coder" && @talk.state != "pending"
+      redirect_to root_path, :alert => "You are not authorized to perform that action."
+    else
+      @talk.destroy
+      respond_to do |format|
+        format.html { redirect_to talks_url, notice: 'Talk was successfully destroyed.' }
+        format.json { head :no_content }
+      end
     end
   end
 
