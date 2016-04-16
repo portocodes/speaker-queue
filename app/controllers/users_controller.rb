@@ -20,10 +20,10 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.create(user_params)
+    @user = User.new(user_params)
     respond_to do |format|
       if @user.save
-        session[:user_id] = @user.id
+        session[:user_id] = @user.id unless current_user
         format.html { redirect_to root_path, notice: 'User was successfully created.' }
         format.json { render :show, status: :created, location: @user }
       else

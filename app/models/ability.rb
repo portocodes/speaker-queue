@@ -2,10 +2,9 @@ class Ability
   include CanCan::Ability
 
   def initialize(user)
-    if user.nil?
-        can [:read, :submit, :create], Talk
-        can [:read, :submit, :create], User
-    elsif user.role == "admin"
+    user ||= User.new
+
+    if user.role == "admin"
         can :manage, User
         can :read, Talk
     elsif user.role == "moderator"
@@ -13,6 +12,10 @@ class Ability
     elsif user.role == "coder"
         can [:read, :create], Talk
         can [:update, :destroy ], Talk, :user_id => user.id
+        can :create, User
+    else
+        can [:read, :submit, :create], Talk
+        can :create, User
     end
   end
 
