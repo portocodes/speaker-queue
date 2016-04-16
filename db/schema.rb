@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(version: 20160416011743) do
     t.string   "state",       default: "pending"
     t.string   "video"
     t.string   "resource"
-    t.datetime "date_event"
+    t.date     "date_event"
   end
 
   add_index "talks", ["user_id"], name: "index_talks_on_user_id"
