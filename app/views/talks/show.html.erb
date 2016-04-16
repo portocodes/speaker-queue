@@ -8,10 +8,18 @@
   <dd><%= @talk.title %></dd>
   <dt><strong><%= model_class.human_attribute_name(:description) %>:</strong></dt>
   <dd><%= @talk.description %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:tag_list) %>:</strong></dt>
+  <dd><%= @talk.tag_list %></dd>
   <dt><strong><%= model_class.human_attribute_name(:duration) %>:</strong></dt>
   <dd><%= @talk.duration %></dd>
   <dt><strong><%= model_class.human_attribute_name(:speaker) %>:</strong></dt>
   <dd><%= @talk.speaker %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:date_event) %>:</strong></dt>
+  <dd><%= @talk.date_event %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:resource) %>:</strong></dt>
+  <dd><%= @talk.resource %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:video) %>:</strong></dt>
+  <dd><%= @talk.video %></dd>
 </dl>
 
 <%= link_to t('.back', :default => t("helpers.links.back")),

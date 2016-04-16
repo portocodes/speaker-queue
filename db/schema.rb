@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160415235014) do
+ActiveRecord::Schema.define(version: 20160416011743) do
 
   create_table "taggings", force: :cascade do |t|
     t.integer  "tag_id"
@@ -42,6 +42,9 @@ ActiveRecord::Schema.define(version: 20160415235014) do
     t.datetime "updated_at",                      null: false
     t.integer  "user_id"
     t.string   "state",       default: "pending"
+    t.string   "video"
+    t.string   "resource"
+    t.datetime "date_event"
   end
 
   add_index "talks", ["user_id"], name: "index_talks_on_user_id"

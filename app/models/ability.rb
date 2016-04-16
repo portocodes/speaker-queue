@@ -12,7 +12,7 @@ class Ability
     elsif user.role == "coder"
         can [:read, :create], Talk
         can [:update, :destroy ], Talk, :user_id => user.id
-        can :create, User
+        can [:create, :submit], User
     else
         can [:read, :submit, :create], Talk
         can :create, User

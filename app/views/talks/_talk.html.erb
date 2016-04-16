@@ -10,6 +10,8 @@
       <th><%= model_class.human_attribute_name(:tag_list) %></th>
       <th><%= model_class.human_attribute_name(:duration) %></th>
       <th><%= model_class.human_attribute_name(:speaker) %></th>
+
+      <th><%= model_class.human_attribute_name(:date_event) %></th>
       <th><%= model_class.human_attribute_name(:status) %></th>
       <% if current_user %>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
@@ -21,9 +23,15 @@
       <tr>
         <td><%= talk.title %></td>
         <td><%= talk.description %></td>
-        <td><span class="tag-color"><%= raw talk.tag_list.map { |t| link_to t, tag_path(t) }.join(', ') %></span></td>
+        <td>
+          <span class="tag-color">
+            <%= raw talk.tag_list.map { |t| link_to t, tag_path(t) }.join(', ') %>
+          </span>
+        </td>
         <td><%= talk.duration %></td>
         <td><%= talk.speaker %></td>
+
+        <td><%= talk.date_event %></td>
         <td><span class="btn status <%= talk.state %>"><%= talk.state %></span></td>
         <% if current_user && (current_user.role == "moderator" || current_user.id == talk.user_id) %>
         <td>
