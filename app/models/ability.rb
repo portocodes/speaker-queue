@@ -8,7 +8,7 @@ class Ability
         can :manage, User
         can :read, Talk
     elsif user.role == "moderator"
-        can [:read, :update], User, :user_id => user.id
+        can [:read, :update], User, :id => user.id
         can :update_states, Talk
         can :manage, Talk
     elsif user.role == "coder"
