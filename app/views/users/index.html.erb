@@ -4,6 +4,7 @@
 <table class="table table-striped">
   <thead>
     <tr>
+      <th>Profile Picture</th>
       <th>Name</th>
       <th>Email</th>
       <th>Role</th>
@@ -14,6 +15,7 @@
   <tbody>
     <% @users.each do |user| %>
       <tr>
+        <td><%= image_tag user.avatar_url(:thumb).to_s %></td>
         <td><%= user.name %></td>
         <td><%= user.email %></td>
         <td><%= user.role %></td>

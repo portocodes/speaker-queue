@@ -17,6 +17,8 @@ gem 'state_machines'
 gem 'state_machines-activerecord'
 gem 'acts-as-taggable-on', '~> 3.4'
 gem 'cancancan', '~> 1.10'
+gem 'carrierwave'
+gem 'rmagick'
 
 group :development do
   gem 'web-console', '~> 2.0'
