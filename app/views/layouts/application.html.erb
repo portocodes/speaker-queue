@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Porto Codes' Speaker Queue</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= favicon_link_tag 'favicon.ico' %>
   <%= csrf_meta_tags %>
@@ -9,20 +8,31 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
 </head>
+
 <body>
-    <%= nav_bar brand: "Porto Codes", brand_link: root_path do %>
-      <p class="navbar-text navbar-right">
+  <% if content_for?(:head) %>
+    <%= content_for(:head) %>
+  <% else %>
+    <title>Porto Codes' Speaker Queue</title>
+  <% end %>
+  <nav class="navbar navbar-default">
+    <div class="container">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="/">PortoCodes</a>
+      </div>
+      <ul class="nav navbar-nav">
         <% if current_user %>
-          Hello,<%= current_user.name %> - <%= link_to 'Log Out', logout_path %>
-          <% else %>
-          <%= link_to "Log In", login_path %>
-          or
-          <%= link_to "Sign Up", signup_path %>
-        <% end %>
-      </p>
-    <% end %>
+        <li class="active"><a href="<%= user_path(current_user.id) %>">Hello <%= current_user.name %></a></li>
+          <li><%= link_to 'Log Out', logout_path %></li>
+        <% else %>
+          <li><%= link_to "Log In", login_path %></li>
+          <li><%= link_to "Sign Up", signup_path %></li>
+         <% end %>
+      </ul>
+    </div>
+  </nav>
 
   <div id="flash">
     <% flash.each do |key, value| %>
@@ -30,10 +40,7 @@
     <% end %>
   </div>
 
-
-
   <main role="main">
-
     <%= yield %>
   </main>
 

@@ -10,7 +10,6 @@
       <th><%= model_class.human_attribute_name(:tag_list) %></th>
       <th><%= model_class.human_attribute_name(:duration) %></th>
       <th><%= model_class.human_attribute_name(:speaker) %></th>
-
       <th><%= model_class.human_attribute_name(:date_event) %></th>
       <th><%= model_class.human_attribute_name(:status) %></th>
       <% if current_user %>
@@ -22,7 +21,7 @@
     <% @talks.each do |talk| %>
       <tr>
         <td><%= talk.title %></td>
-        <td><%= talk.description %></td>
+        <td><%= link_to talk.description, talk_path(talk.id) %></td>
         <td>
           <span class="tag-color">
             <%= raw talk.tag_list.map { |t| link_to t, tag_path(t) }.join(', ') %>
@@ -31,29 +30,30 @@
         <td><%= talk.duration %></td>
         <td><%= talk.speaker %></td>
         <td><%= talk.date_event %></td>
-        <td><span class="btn status <%= talk.state %>"><%= talk.state %></span></td>
+        <td class="dropdown">
+          <button class="btn dropdown-toggle status <%= talk.state %>" type="button" data-toggle="dropdown">
+            <%= talk.state %>
+            <% if can? :update_states, Talk %>
+            <span class="caret"></span>
+          </button>
+            <ul class="dropdown-menu">
+              <li class="approved"><%= link_to 'Approve', approve_talk_path(talk), method: :put  %></li>
+              <li class="rejected"><%= link_to 'Reject',  reject_talk_path(talk),  method: :put %></li>
+              <li class="delayed "><%= link_to 'Delay',   delay_talk_path(talk),   method: :put %></li>
+              <% end %>
+            </ul>
+
         <% if current_user && (current_user.role == "moderator" || current_user.id == talk.user_id) %>
         <td>
           <%= link_to '<i class="fa fa-pencil-square-o"></i>'.html_safe,
                       edit_talk_path(talk), :class => 'btn btn-default btn-md',
-                      :title => 'Edit', :rel => 'tooltip', "data-placement" => "left" %>
+                      :title => 'Edit' %>
           <%= link_to '<i class="fa fa-ban"></i>'.html_safe,
                       talk_path(talk),
                       :method => :delete,
                       :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
                       :class => 'btn btn-md btn-danger',
-                      :title => 'Delete', :rel => 'tooltip', "data-placement" => "right" %>
-          <% if can? :update_states, Talk %>
-          <%= link_to '<i class="fa fa-check fa-lg"></i>'.html_safe, approve_talk_path(talk), method: :put,
-                      :class => 'btn btn-md btn-default',
-                      :title => 'Approve', :rel => 'tooltip', "data-placement" => "right" %>
-          <%= link_to '<i class="fa fa-times-circle fa-lg"></i>'.html_safe, reject_talk_path(talk), method: :put,
-                      :class => 'btn btn-md btn-default',
-                      :title => 'Reject', :rel => 'tooltip', "data-placement" => "right" %>
-          <%= link_to '<i class="fa fa-clock-o fa-lg"></i>'.html_safe, delay_talk_path(talk), method: :put,
-                      :class => 'btn btn-md btn-default',
-                      :title => 'Delay', :rel => 'tooltip', "data-placement" => "right" %>
-          <% end %>
+                      :title => 'Delete' %>
         </td>
       <% end %>
       </tr>

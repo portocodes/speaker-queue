@@ -37,15 +37,6 @@ class TalksController < ApplicationController
     @talk = Talk.new
   end
 
-  def edit
-    @talks = Talk.all
-    if current_user.role == "coder" && @talk.state != "pending"
-      redirect_to root_path, :alert => "You are not authorized to perform that action."
-    else
-      @talk = @talks.find(params[:id])
-    end
-  end
-
   def create
     @user = current_user
     @talk = @user.talks.new(talk_params)
@@ -58,6 +49,15 @@ class TalksController < ApplicationController
         format.html { render :new }
         format.json { render json: @talk.errors, status: :unprocessable_entity }
       end
+    end
+  end
+
+  def edit
+    @talks = Talk.all
+    if current_user.role == "coder" && @talk.state != "pending"
+      redirect_to root_path, :alert => "You are not authorized to perform that action."
+    else
+      @talk = @talks.find(params[:id])
     end
   end
 
