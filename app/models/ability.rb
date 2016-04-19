@@ -6,15 +6,16 @@ class Ability
 
     if user.role == "admin"
         can :manage, User
+        cannot :destroy, User, id: user.id
         can :read, Talk
     elsif user.role == "moderator"
-        can [:read, :update], User, :id => user.id
+        can [:read, :update], User, id: user.id
         can :update_states, Talk
         can :manage, Talk
     elsif user.role == "coder"
         can [:read, :create], Talk
-        can [:update, :destroy ], Talk, :user_id => user.id
-        can [:read, :update], User, :id => user.id
+        can [:update, :destroy ], Talk, user_id: user.id
+        can [:read, :update], User, id:user.id
         can [:create, :submit], User
     else
         can [:read, :submit, :create], Talk
