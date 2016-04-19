@@ -1,9 +1,6 @@
-<%- model_class = Talk -%>
 <div class="container">
   <div class="row">
-      <h1 class="page-header">
-        <%=t '.title', :default => [:'helpers.titles.edit', 'New %{model}'], :model => model_class.model_name.human.titleize %>
-      </h1>
-      <%= render :partial => 'form' %>
-     </div>
+    <h1 class="page-header">Editing Talk "<strong><%= @talk.title %></strong>"</h1>
+    <%= render "talks/partials/form" %>
   </div>
+</div>

@@ -10,7 +10,7 @@
       <th><%= model_class.human_attribute_name(:tag_list) %></th>
       <th><%= model_class.human_attribute_name(:duration) %></th>
       <th><%= model_class.human_attribute_name(:speaker) %></th>
-      <th><%= model_class.human_attribute_name(:date_event) %></th>
+      <th><%= model_class.human_attribute_name(:time_event) %></th>
       <th><%= model_class.human_attribute_name(:status) %></th>
       <% if current_user %>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
@@ -29,7 +29,7 @@
         </td>
         <td><%= talk.duration %></td>
         <td><%= talk.speaker %></td>
-        <td><%= talk.date_event %></td>
+        <td><%= talk.time_event %></td>
         <td class="dropdown">
           <button class="btn dropdown-toggle status <%= talk.state %>" type="button" data-toggle="dropdown">
             <%= talk.state %>

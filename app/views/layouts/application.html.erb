@@ -1,50 +1,29 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= favicon_link_tag 'favicon.ico' %>
-  <%= csrf_meta_tags %>
-  <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
-</head>
+  <head>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= favicon_link_tag 'favicon.ico' %>
+    <%= csrf_meta_tags %>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+  </head>
+  <body>
 
-<body>
-  <% if content_for?(:head) %>
-    <%= content_for(:head) %>
-  <% else %>
-    <title>Porto Codes' Speaker Queue</title>
-  <% end %>
-  <nav class="navbar navbar-default">
-    <div class="container">
-      <div class="navbar-header">
-        <a class="navbar-brand" href="/">PortoCodes</a>
-      </div>
-      <ul class="nav navbar-nav">
-        <% if current_user %>
-        <li><%= image_tag current_user.avatar_url(:thumb).to_s %></li>
-        <li class="active"><a href="<%= user_path(current_user.id) %>">Hello <%= current_user.name %></a></li>
-          <li><%= link_to 'Log Out', logout_path %></li>
-        <% else %>
-          <li><%= link_to "Log In", login_path %></li>
-          <li><%= link_to "Sign Up", signup_path %></li>
-         <% end %>
-      </ul>
-    </div>
-  </nav>
-
-  <div id="flash">
-    <% flash.each do |key, value| %>
-      <div class="flash <%= key %>"><%= value %></div>
+    <% if content_for?(:head) %>
+       <%= content_for(:head) %>
+    <% else %>
+      <title>Porto Codes' Speaker Queue</title>
     <% end %>
-  </div>
 
-  <main role="main">
-    <%= yield %>
-  </main>
+    <%= render "layouts/components/flash" %>
 
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-</body>
+    <%= render "layouts/components/navbar" %>
+
+    <%= render "layouts/components/sidebar" %>
+
+    <main role="main">
+      <%= yield %>
+    </main>
+
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  </body>
 </html>

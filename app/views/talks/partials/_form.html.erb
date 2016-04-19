@@ -38,8 +38,9 @@
   </div>
 
   <div class="form-group">
-    <%= f.label :date_event, :class => 'control-label ' %>
-    <%= f.text_field :date_event, :class => 'form-control', :id => 'datepicker', required: true %>
+    <%= f.label :time_event, :class => 'control-label ' %>
+    <%= f.text_field :talk_date, :class => 'datepicker', required: true %>
+    <%= f.text_field :talk_time, :size => 5, :maxlength => 5 %>
   </div>
 
   <div class="form-group">
