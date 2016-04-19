@@ -1,6 +1,9 @@
 class Talk < ActiveRecord::Base
   belongs_to :user
   acts_as_taggable
+  attr_accessor :talk_date, :talk_time
+  after_initialize :get_datetimes
+  before_validation :set_datetimes
 
   state_machine :state, :initial => :pending do
     event :approve do
@@ -20,6 +23,17 @@ class Talk < ActiveRecord::Base
       transition :approved => :delayed
       transition :rejected => :delayed
     end
+  end
+
+  def get_datetimes
+    self.time_event ||= Time.now
+
+    self.talk_date ||= self.time_event.to_date.to_s(:db)
+    self.talk_time ||= "#{'%02d' % self.time_event.hour}:#{'%02d' % self.time_event.min}"
+  end
+
+  def set_datetimes
+    self.time_event = "#{self.talk_date} #{self.talk_time}:00"
   end
 
 end

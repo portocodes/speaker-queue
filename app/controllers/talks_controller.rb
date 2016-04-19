@@ -93,6 +93,18 @@ class TalksController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def talk_params
-      params.require(:talk).permit(:title, :description, :duration, :speaker, :state, :tag_list, :video, :resource, :date_event)
+      params.require(:talk).permit(
+                                  :title,
+                                  :description,
+                                  :duration,
+                                  :speaker,
+                                  :state,
+                                  :tag_list,
+                                  :video,
+                                  :resource,
+                                  :time_event,
+                                  :talk_date,
+                                  :talk_time
+                                  )
     end
 end

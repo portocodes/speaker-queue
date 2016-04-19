@@ -73,7 +73,9 @@ class UsersController < ApplicationController
                                     :tag_list,
                                     :video,
                                     :resource,
-                                    :date_event
+                                    :time_event,
+                                    :talk_date,
+                                    :talk_time
                                     ]
                                   )
     end
