@@ -1,9 +1,25 @@
 Rails.application.routes.draw do
 
-  root 'home#index'
+  get 'submit',  to: 'users#submit',     as: 'submit'
+  post 'submit', to: 'users#create',     as: 'submit2'
 
-  devise_for :users, controllers: { registrations: "registrations" }
-  
-  resources :talks
+  get 'signup',  to: 'users#new',        as: 'signup'
+  get 'login' ,  to: 'sessions#new',     as: 'login'
+  get 'logout',  to: 'sessions#destroy', as: 'logout'
+
+  resources :users
+  resources :sessions
+
+  get 'tags/:tag', to: 'talks#index', as: :tag
+
+  resources :talks do
+    member do
+      put "approve"
+      put "reject"
+      put "delay"
+    end
+  end
+
+  root 'talks#index'
 
 end

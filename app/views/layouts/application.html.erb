@@ -1,35 +1,29 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Porto Codes' Speaker Queue</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
-    <%= nav_bar brand: "Porto Codes", brand_link: root_path do %>
-      <p class="navbar-text navbar-right">
-        <% if user_signed_in? %>
-          Hello, <%= current_user.name %> - <%= link_to "Sign Out", destroy_user_session_path, :method =>  'delete' %>
-          <% else %>
-          <%= link_to "Sign In", new_user_session_path %>
-          <%= link_to "Sign Up", new_user_registration_path %>
-        <% end %>
-      </p>
+  <head>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= favicon_link_tag 'favicon.ico' %>
+    <%= csrf_meta_tags %>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+  </head>
+  <body>
+
+    <% if content_for?(:head) %>
+       <%= content_for(:head) %>
+    <% else %>
+      <title>Porto Codes' Speaker Queue</title>
     <% end %>
 
-  <div id="flash">
-    <% flash.each do |key, value| %>
-      <div class="flash <%= key %>"><%= value %></div>
-    <% end %>
-  </div>
+    <%= render "layouts/components/flash" %>
 
-  <div class="container">
-    <div class="row">
-      <div class="span12">
-        <%= yield %>
-      </div>
-    </div>
-  </div>
-</body>
+    <%= render "layouts/components/navbar" %>
+
+    <%= render "layouts/components/sidebar" %>
+
+    <main role="main">
+      <%= yield %>
+    </main>
+
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  </body>
 </html>

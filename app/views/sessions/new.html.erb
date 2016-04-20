@@ -1,0 +1,8 @@
+<h1>Log in</h1>
+<p>
+  <%= form_tag sessions_path do %>
+    <%= label_tag :email %>
+    <%= email_field_tag :email, params[:email], required: true, autofocus: true %>
+    <%=  submit_tag "Log In" %>
+  <% end %>
+</p>

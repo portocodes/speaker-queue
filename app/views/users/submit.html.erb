@@ -1,0 +1,37 @@
+<div class="container">
+ <h1>SUBMIT A NEW TALK & SIGN UP</h1>
+  <div class="col-lg-6">
+    <%= form_for @user, :html => { :class => "form-horizontal talk" } do |f| %>
+      <div class="form-group">
+        <%= f.label :name %><br />
+        <%= f.text_field :name, autofocus: true %>
+      </div>
+      <div class="form-group">
+        <%= f.label :email %><br />
+        <%= f.email_field :email %>
+      </div>
+      <%= f.fields_for :talks  do |ff| %>
+        <div class="form-group">
+          <%= ff.label :title, :class => 'control-label ' %>
+          <%= ff.text_field :title, :class => 'form-control' %>
+        </div>
+        <div class="form-group">
+          <%= ff.label :description, :class => 'control-label ' %>
+          <%= ff.text_area :description, cols: "30", rows: "10", :class => 'form-control' %>
+        </div>
+
+        <div class="form-group">
+          <%= ff.label :duration, :class => 'control-label ' %>
+          <%= ff.number_field :duration, :class => 'form-control', :size => "10", max: 30 %>
+        </div>
+        <div class="form-group">
+          <%= ff.label :speaker, :class => 'control-label ' %>
+          <%= ff.text_field :speaker, :class => 'form-control' %>
+        </div>
+      <% end %>
+    <div class="form-group">
+      <%= f.submit "Sign Up & Submit Your First Talk", :class => 'btn btn-primary' %>
+    </div>
+  <% end %>
+</div>
+

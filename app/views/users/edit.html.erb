@@ -1,0 +1,9 @@
+<% content_for :head do %>
+  <title><%= @user.name %>'s profile </title>
+<% end %>
+<div class="container">
+<h1>Edit Your Profile</h1>
+  <%= render 'form' %>
+  <%= link_to 'Show', @user %> |
+  <%= link_to 'Back', users_path %>
+</div>
