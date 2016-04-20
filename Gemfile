@@ -23,6 +23,7 @@ gem 'bootstrap-sass', '~> 3.3.6'
 
 group :development do
   gem 'web-console', '~> 2.0'
+  gem 'pry'
 end
 
 group :development, :test do

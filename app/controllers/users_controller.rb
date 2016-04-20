@@ -12,6 +12,10 @@ class UsersController < ApplicationController
 
   def new
     @user = User.new
+  end
+
+  def submit
+    @user ||= User.new
     @user.talks.build
   end
 

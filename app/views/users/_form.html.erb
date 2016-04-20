@@ -10,11 +10,14 @@
     </div>
   <% end %>
 
-  <%= image_tag @user.avatar_url(:normal).to_s if @user.avatar? %>
-
   <div class="field">
     <%= f.label :avatar %><br>
-    <%= f.file_field :avatar %>
+    <%= f.file_field :avatar, :id => 'inputFile' %>
+    <% if @user.avatar? %>
+    <%= image_tag @user.avatar_url(:normal).to_s, class: "image_upload_preview" %>
+    <% else %>
+    <%= image_tag "http://placehold.it/200x200", size: "200", class: "image_upload_preview" %>
+    <% end %>
   </div>
 
     <div class="field">
@@ -23,8 +26,8 @@
   </div>
   <p>
     <label>
-      <%= f.check_box :remove_avatar %>
-      Remove avatar
+      <%= f.check_box :remove_avatar if current_user %>
+      <%= f.label "Remove Avatar" if current_user %>
     </label>
   </p>
   <div class="field">
