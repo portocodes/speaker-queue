@@ -44,7 +44,6 @@ ActiveRecord::Schema.define(version: 20160418194740) do
     t.string   "state",       default: "pending"
     t.string   "video"
     t.string   "resource"
-    t.date     "date_event"
     t.datetime "time_event"
   end
 
