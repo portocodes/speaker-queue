@@ -1,9 +1,20 @@
 <nav class="navbar navbar-default">
-    <div class="container">
-      <div class="navbar-header">
-        <a class="navbar-brand" href="/">PortoCodes</a>
-      </div>
+  <div class="container-fluid">
+
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/"><%= image_tag("logo.svg", :alt => "Porto Codes", class: "img-responsive") %></a>
+    </div> <!-- /.navbar-header -->
+
+    <div class="collapse navbar-collapse" id="navbar-collapse">
+      <p>We are a group of software enthusiasts that meet every month to share experiences.</p>
       <ul class="nav navbar-nav">
+          <li><%= link_to "About us", root_path %></li>
         <% if current_user %>
           <li><%= image_tag current_user.avatar_url(:thumb).to_s %></li>
           <li class="active"><a href="<%= user_path(current_user.id) %>">Hello <%= current_user.name %></a></li>
@@ -13,5 +24,14 @@
           <li><%= link_to "Sign Up", signup_path %></li>
         <% end %>
       </ul>
-    </div>
-  </nav>
+      <hr />
+      <ul class="list-inline social">
+        <li><%= link_to "Slack", root_path %></li>
+        <li><%= link_to "Meetup", root_path %></li>
+        <li><%= link_to "Github", root_path %></li>
+        <li><%= link_to "Youtube", root_path %></li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+
+  </div>
+</nav>
