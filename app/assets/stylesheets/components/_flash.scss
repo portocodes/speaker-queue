@@ -1,0 +1,39 @@
+.flash {
+  position: fixed;
+  top: 80px;
+  right: 50%;
+  padding: 15px 15px;
+  color: #ffffff;
+  font-size: 15px;
+  z-index: 1;
+  border-radius: 10px;
+    box-shadow:
+    0 1px 1px rgba(0,0,0,0.1);
+
+  opacity: 0;
+  animation: fadeOut 3s linear forwards;
+}
+
+@keyframes fadeOut {
+  0%  { opacity: 0; display: none; }
+  10% { opacity: 1; display: block; }
+  90% { opacity: 1; transform: translateY(0px);}
+  99% { opacity: 0; transform: translateY(-30px);}
+  100% { opacity: 0; display:none; }
+}
+
+.notice {
+  background: rgba(55, 93, 150, 0.9);
+}
+
+.error {
+  background: rgba(215, 40, 40, 0.9);
+}
+
+.success {
+  background: rgba(104, 146, 150, 0.9);
+}
+
+.alert {
+  background-color: rgb(255, 128, 0);
+}

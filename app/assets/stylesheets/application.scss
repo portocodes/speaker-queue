@@ -15,7 +15,9 @@
  */
 @import "bootstrap-sprockets";
 @import "bootstrap";
-
-@import "variables";
+@import "include/_bootstrap_ms";
+@import "include/_vars";
+@import "include/_mixins";
+@import "include/_fonts";
 @import "components/*";
 @import "main/*";
