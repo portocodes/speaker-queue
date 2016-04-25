@@ -1,20 +1,31 @@
 <div class="container">
-  <p>
-    <%= image_tag @user.avatar_url(:normal).to_s %>
-  </p>
-  <p>
-    <strong>Name:</strong>
-    <%= @user.name %>
-  </p>
-  <p>
-    <strong>Email:</strong>
-    <%= @user.email %>
-  </p>
+  <div class="jumbotron">
+    <p>
+      <%= image_tag @user.avatar_url(:normal).to_s %>
+    </p>
 
-  <strong>Avatar URL:</strong>
-    <%= @user.avatar %>
-  </p>
+    <p>
+      <strong>Name:</strong>
+      <% if @user.name.empty? %>
+        <small>&lt;not provided&gt;</small>
+      <% else %>
+        <%= @user.name %>
+      <% end %>
+    </p>
 
-  <%= link_to 'Edit', edit_user_path(@user) %> |
-  <%= link_to 'Back', users_path %>
+    <p>
+      <strong>Email:</strong>
+      <%= @user.email %>
+    </p>
+
+    <p><strong>Talks</strong></p>
+    <ul>
+    <% @user.talks.each do |talk| %>
+      <li><%= link_to talk.title, talk %></li>
+    <% end %>
+    </ul>
+
+    <%= link_to 'Edit', edit_user_path(@user) %> |
+    <%= link_to 'Back', users_path %>
+  </div>
 </div>
