@@ -11,15 +11,19 @@
     <% if content_for?(:head) %>
        <%= content_for(:head) %>
     <% else %>
-      <title>Porto Codes' Speaker Queue</title>
+      <title>PortoCodes</title>
     <% end %>
-
     <%= render "layouts/components/flash" %>
-
     <%= render "layouts/components/navbar" %>
 
     <main role="main">
-      <%= yield %>
+      <section id="content">
+       <div class="container-fluid">
+         <div class="row">
+            <%= yield %>
+          </div>
+        </div>
+      </section>
     </main>
 
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
