@@ -1,3 +1,5 @@
+/***** Generic *****/
+
 body {
   font-family: $font-text;
   font-size: 16px;
@@ -18,9 +20,10 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h2 {
-  font-size: 38px;
+  font-size: 36px;
   font-weight: 700;
   text-transform: uppercase;
+  max-width: 450px;
 
   small {
     display: block;
@@ -28,18 +31,94 @@ h2 {
     font-weight: 700;
     text-transform: uppercase;
     color: $brand-primary;
-    margin: 10px 0 25px 0;
+    margin: 5px 0 25px 0;
+
+    a {
+      color: $brand-primary-darker;
+    }
   }
 }
 
-a { @include transition(all 0.25s) }
+hr {
+  display: block;
+  margin: 0 0 30px 0;
+  border: solid 1px $gray-light;
+  width: 34px;
+}
+
+
+/***** Links & Buttons *****/
+
+a, .btn {
+  @include transition(all 0.25s);
+}
+
+a {
+  color: $brand-primary;
+  text-decoration: none;
+
+  &:hover, &:focus, &:active, &.active {
+    color: $brand-primary-darker;
+    text-decoration: none;
+  }
+}
+
+.btn{
+
+  &.btn-primary {
+    background-color: $brand-primary;
+    @include border-radius(0);
+    border: 0;
+    font-family: $font-title;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 15px;
+    margin-right: 10px;
+
+    &:hover, &:focus, &:active, &.active {
+      background-color: $brand-primary-darker;
+    }
+
+    &.icon {
+      padding: 0 8px 0 0;
+
+      span {
+        margin-right: 4px;
+        display: inline-block;
+        background-color: $brand-primary-darker;
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: 20px 20px;
+        height: 34px;
+        width: 34px;
+        vertical-align: middle;
+        @include transition(all 0.25s);
+      }
+
+      &.icon-video span    {
+        background-image: image-url("icon-video.svg");
+      }
+      &.icon-download span {
+        background-image: image-url("icon-download.svg");
+        background-size: 18px 18px;
+      }
+    }
+
+  }
+}
+
+
+/***** Forms *****/
+
+
+/***** Navbar *****/
 
 nav.navbar {
   position: fixed;
   top: 0;
   left: 0;
   height: 100%;
-  width: 410px;
+  width: 380px;
   background-color: $brand-primary;
   border: 0;
   @include border-radius(0);
@@ -57,7 +136,7 @@ nav.navbar {
 
       .navbar-brand {
         float: none;
-        padding: 0 70px 50px 70px;
+        padding: 0 65px 45px 65px;
         position: absolute;
         bottom: 0;
         left: 0;
@@ -76,18 +155,14 @@ nav.navbar {
       left: 0;
       width: 100%;
       height: 50% !important;
-      padding: 50px 70px 0 70px;
+      padding: 40px 65px 0 65px;
 
       p {
         color: $white;
       }
 
       hr {
-        display: block;
-        margin: 0 0 25px 0;
-        border: solid 2px $white;
-        width: 60px;
-        opacity: 0.75;
+        border: solid 1px $white;
       }
 
       .navbar-nav {
@@ -102,7 +177,7 @@ nav.navbar {
             color: $white;
             font-weight: 700;
             text-transform: uppercase;
-            font-size: 17px;
+            font-size: 16px;
             margin-right: 15px;
 
             &:hover, &:focus, &:active, &.active { opacity: 0.75 }
@@ -113,8 +188,43 @@ nav.navbar {
       }
 
       ul.social {
+        margin: 0;
+
         li {
-          a { color: $white }
+          padding: 0 10px 0 0;
+
+          a {
+            color: $white;
+            background-color: $brand-primary-dark;
+            width: 34px;
+            height: 34px;
+            display: inline-block;
+            text-align: center;
+
+            &:hover, &:focus, &:active, &.active {
+              background-color: $brand-primary-darker;
+            }
+
+            i {
+              display: inline-block;
+              vertical-align: middle;
+              margin-top: 6px;
+
+              &.fa {
+                font-size: 20px;
+
+                &.fa-slack { font-size: 17px; }
+              }
+
+              &.fa-meetup {
+                background-image: image-url("fa-meetup.svg");
+                background-repeat: no-repeat;
+                background-position: center center;
+                width: 16px;
+                height: 16px;
+              }
+            }
+          }
         }
       }
 
@@ -122,6 +232,72 @@ nav.navbar {
   }
 }
 
+
+/***** Main Content *****/
+
 section#content {
-  margin: 90px 0 0 485px;
+  margin: 70px 0 70px 455px;
+
+  .talk-post {
+    margin-bottom: 35px;
+
+
+    &:after, .end, .start {
+      display: none;
+      margin-top: 35px;
+      font-size: 36px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: $brand-primary;
+    }
+
+    .start { margin-top: 0; margin-bottom: 35px; }
+
+    .end span, .start span {
+      font-family: $font-title;
+      color: $gray-light;
+      font-weight: 500;
+      font-size: 20px;
+      vertical-align: middle;
+    }
+
+    &:after {
+      content: "} {";
+      display: block;
+    }
+
+    &:first-child {
+      .start  { display: block }
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+
+      &:after { display: none }
+      .end    { display: block }
+    }
+  }
+
+}
+
+
+/***** Bootstrap *****/
+
+.tooltip .tooltip-inner {
+  background-color:$brand-primary-darker;
+  font-family: $font-title;
+  color: $white;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 13px;
+  padding-bottom: 4px;
+  @include border-radius(0);
+}
+
+.tooltip.bottom .tooltip-arrow {
+  border-bottom-color: $brand-primary-darker
+}
+
+.tooltip.right .tooltip-arrow {
+  border-right-color: $brand-primary-darker
 }
