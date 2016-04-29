@@ -1,6 +1,7 @@
 class Talk < ActiveRecord::Base
   belongs_to :user
   acts_as_taggable
+  nilify_blanks :only => [:video, :resource]
   attr_accessor :talk_date, :talk_time
   after_initialize :get_datetimes
   before_validation :set_datetimes
