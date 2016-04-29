@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  root 'pages#main'
+
+  get 'about_us',  to: 'pages#about_us', as: "about_us"
 
   get 'submit',    to: 'users#submit',     as: 'submit'
   post 'submit',   to: 'users#create'
@@ -21,5 +24,5 @@ Rails.application.routes.draw do
     end
   end
 
-  root 'dashboards#main'
+
 end
