@@ -20,6 +20,7 @@ gem 'cancancan', '~> 1.10'
 gem "carrierwave", git: 'https://github.com/carrierwaveuploader/carrierwave.git', branch: '0.11-stable'
 gem 'rmagick'
 gem 'bootstrap-sass', '~> 3.3.6'
+gem "nilify_blanks"
 
 group :development do
   gem 'web-console', '~> 2.0'
