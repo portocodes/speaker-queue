@@ -24,9 +24,17 @@ class TalksController < ApplicationController
   def index
     @users = User.all
     if params[:tag]
-      @talks = Talk.tagged_with(params[:tag])
+      if current_user.role == "moderator"
+        @talks = Talk.tagged_with(params[:tag])
+      else
+        @talks = current_user.talks.tagged_with(params[:tag])
+      end
     else
-      @talks = Talk.all
+      if current_user.role == "moderator"
+        @talks = Talk.all
+      else
+        @talks = current_user.talks.all
+      end
     end
   end
 
@@ -38,8 +46,7 @@ class TalksController < ApplicationController
   end
 
   def create
-    @user = current_user
-    @talk = @user.talks.new(talk_params)
+    @talk = current_user.talks.new(talk_params)
     respond_to do |format|
       if @talk.save
         # TalkMailer.talk_created(@user).deliver_later
@@ -55,7 +62,7 @@ class TalksController < ApplicationController
   def edit
     @talks = Talk.all
     if current_user.role == "coder" && @talk.state != "pending"
-      redirect_to root_path, :alert => "You are not authorized to perform that action."
+      redirect_to talks_path, :alert => "You are not authorized to perform that action."
     else
       @talk = @talks.find(params[:id])
     end
@@ -64,7 +71,7 @@ class TalksController < ApplicationController
   def update
     respond_to do |format|
       if @talk.update(talk_params)
-        format.html { redirect_to root_path, notice: 'Talk was successfully updated.' }
+        format.html { redirect_to talks_path, notice: 'Talk was successfully updated.' }
         format.json { render :show, status: :ok, location: @talk }
       else
         format.html { render :edit }
@@ -75,11 +82,11 @@ class TalksController < ApplicationController
 
   def destroy
     if current_user.role == "coder" && @talk.state != "pending"
-      redirect_to root_path, :alert => "You are not authorized to perform that action."
+      redirect_to talks_path, :alert => "You are not authorized to perform that action."
     else
       @talk.destroy
       respond_to do |format|
-        format.html { redirect_to talks_url, notice: 'Talk was successfully destroyed.' }
+        format.html { redirect_to talks_path, notice: 'Talk was successfully destroyed.' }
         format.json { head :no_content }
       end
     end
@@ -97,6 +104,7 @@ class TalksController < ApplicationController
                                   :title,
                                   :description,
                                   :duration,
+                                  :month,
                                   :speaker,
                                   :state,
                                   :tag_list,
@@ -104,7 +112,9 @@ class TalksController < ApplicationController
                                   :resource,
                                   :time_event,
                                   :talk_date,
-                                  :talk_time
+                                  :talk_time,
+                                  :location_name,
+                                  :location_coordinates
                                   )
     end
 end

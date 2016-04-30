@@ -33,25 +33,39 @@
   </div>
 
   <div class="form-group">
-    <%= f.label :duration, :class => 'control-label ' %>
-    <%= f.number_field :duration, :class => 'form-control', :size => "10", max: 30, required: true %>
+    <%= f.label 'Duration:', :class => 'control-label ' %>
+    <%= f.select :duration, options_for_select([5, 15, 30, 45], selected: f.object.duration) %><strong> minutes</strong>
   </div>
 
   <div class="form-group">
-    <%= f.label :time_event, :class => 'control-label ' %>
-    <%= f.text_field :talk_date, :class => 'datepicker', required: true %>
-    <%= f.text_field :talk_time, :size => 5, :maxlength => 5 %>
+    <%= f.label 'Month:', :class => 'control-label ' %>
+    <%= f.collection_select :month, Talk::MONTHS, :to_s, :humanize %>
   </div>
 
-  <div class="form-group">
-    <%= f.label :video, :class => 'control-label ' %>
-    <%= f.text_field :video, :class => 'form-control' %>
-  </div>
+  <% if can? :manage, Talk %>
+    <div class="form-group">
+      <%= f.label 'Where?', :class => 'control-label ' %>
+      <%= f.text_field :location_name, :class => 'form-control' %>
+      <%= f.label 'Location Coordinates:', :class => 'control-label ' %>
+      <%= f.text_field :location_coordinates, :class => 'form-control' %>
+    </div>
 
-  <div class="form-group">
-    <%= f.label :resource, :class => 'control-label ' %>
-    <%= f.text_field :resource, :class => 'form-control' %>
-  </div>
+    <div class="form-group">
+      <%= f.label :time_event, :class => 'control-label ' %>
+      <%= f.text_field :talk_date, :class => 'datepicker' %>
+      <%= f.text_field :talk_time, :size => 5, :maxlength => 5 %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :video, :class => 'control-label ' %>
+      <%= f.text_field :video, :class => 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <%= f.label :resource, :class => 'control-label ' %>
+      <%= f.text_field :resource, :class => 'form-control' %>
+    </div>
+  <% end %>
 
   <div class="form-group">
     <%= f.label :speaker, :class => 'control-label ' %>
