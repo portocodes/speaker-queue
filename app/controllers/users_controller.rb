@@ -16,7 +16,7 @@ class UsersController < ApplicationController
 
   def submit
     @user ||= User.new
-    @user.talks.build
+    @talk = @user.talks.build
   end
 
 
@@ -72,6 +72,7 @@ class UsersController < ApplicationController
                                     :title,
                                     :description,
                                     :duration,
+                                    :month,
                                     :speaker,
                                     :state,
                                     :tag_list,
@@ -79,7 +80,9 @@ class UsersController < ApplicationController
                                     :resource,
                                     :time_event,
                                     :talk_date,
-                                    :talk_time
+                                    :talk_time,
+                                    :location_name,
+                                    :location_coordinates
                                     ]
                                   )
     end

@@ -343,6 +343,12 @@ section#content {
       &:after { display: none }
       .end    { display: block }
     }
+
+    .talk-details {
+      strong {
+        color: $brand-primary;
+      }
+    }
   }
 
 }

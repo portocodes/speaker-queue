@@ -1,34 +1,40 @@
 <div class="col-lg-8">
 
-
-
   <% @talks.each do |talk| %>
-    <div class="talk-post">
 
-      <div class="start">{ <span>// TalkList @ PortoCodes</span></div>
+    <% if talk.state == "approved" %>
 
-      <h2>
-        <%= talk.title %>
-        <small><%= talk.time_event %> . <a href="http://maps.google.com" target="_blank" class="brand-tooltip" data-toggle="tooltip" data-placement="right" title="Porto.io">Where?</a></small>
-      </h2>
+      <div class="talk-post">
 
-      <%= simple_format talk.description %>
+        <div class="start">{ <span>// TalkList @ PortoCodes</span></div>
 
-      <% if talk.video or talk.resource %><hr><% end %>
+        <h2>
+          <%= talk.title %>
+          <small><%= talk.time_event %> . <a href="<%= talk.location_coordinates %>" target="_blank" class="brand-tooltip" data-toggle="tooltip" data-placement="right" title="<%= talk.location_name %>">Where?</a></small>
+        </h2>
 
-      <% if talk.video %>
-      <a href="<%= talk.video %>" target="_blank" class="btn btn-primary icon icon-video"><span></span> Watch video</a>
-      <% end %>
+        <%= simple_format talk.description %>
 
-      <% if talk.resource %>
-      <a href="<%= talk.resource %>" target="_blank" class="btn btn-primary icon icon-download"><span></span> Download</a>
-      <% end %>
+        <p class="talk-details"><strong>Duration:</strong> <%= talk.duration %> minutes</br>
+        <strong>Speaker:</strong> <%= talk.speaker %></p>
 
-      <div class="end">} <span>// End.TalkList</span></div>
+        <% if talk.video or talk.resource %><hr><% end %>
 
-    </div>
+        <% if talk.video %>
+        <a href="<%= talk.video %>" target="_blank" class="btn btn-primary icon icon-video"><span></span> Watch video</a>
+        <% end %>
+
+        <% if talk.resource %>
+        <a href="<%= talk.resource %>" target="_blank" class="btn btn-primary icon icon-download"><span></span> Download</a>
+
+        <% end %>
+
+        <div class="end">} <span>// End.TalkList</span></div>
+
+      </div>
+
+    <% end %>
 
   <% end %>
-
 
 </div>

@@ -9,6 +9,6 @@
       <h1 class="page-header">
         <%=t '.title', :default => [:'helpers.titles.new', 'New %{model}'], :model => model_class.model_name.human.titleize %>
       </h1>
-      <%= render 'talks/partials/form' %>
+      <%= render partial: 'form' %>
      </div>
   </div>
