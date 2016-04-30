@@ -1,13 +1,10 @@
-<div class="container">
-  <h1>this is the dashboard for users</h1>
-  <div class="row">
-    <%= render "dashboards/panels/archive" %>
-    <%= render "dashboards/panels/owned_talks" %>
-    <% if can? :manage, Talk %>
-      <%= render "dashboards/panels/talks" %>
-    <% end %>
-    <% if can? :manage, User %>
-      <%= render "dashboards/panels/users" %>
-    <% end %>
-  </div>
+<div class="col-xs-12">
+  <h1>Dashboard</h1>
 </div>
+<% if can? :update, Talk %>
+    <%= render "dashboards/panels/talks" %>
+<% end %>
+<% if can? :manage, User %>
+    <%= render "dashboards/panels/users" %>
+<% end %>
+

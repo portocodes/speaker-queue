@@ -3,8 +3,13 @@
     <div class="thumbnail">
       <img src="http://placehold.it/500x250/EEE">
         <div class="caption">
-          <h4>Talks</h4>
-          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere, soluta, eligendi doloribus sunt minus amet sit debitis repellat. Consectetur, culpa itaque odio similique suscipit</p>
+          <% if current_user.role == "moderator" %>
+            <h4>Talks Manager</h4>
+            <p>Manage all the talks that have been submitted to our Speaker Queue. In here you can update content, change the status and set the time event for every talk.</p>
+          <% else %>
+            <h4>Manage your Talks</h4>
+            <p>Manage your submitted talks while they are under evaluation to be accepted or rejected. In that period you can change the content of your talk proposal.</p>
+          <% end %>
       </div>
     </div>
   </div>
