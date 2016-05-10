@@ -1,31 +1,14 @@
-<div class="container">
-  <div class="jumbotron">
-    <p>
-      <%= image_tag @user.avatar_url(:normal).to_s %>
-    </p>
+<% content_for :head do %>
+  <title><%= @user.name  %>'s Profile</title>
+<% end %>
 
-    <p>
-      <strong>Name:</strong>
-      <% if @user.name.empty? %>
-        <small>&lt;not provided&gt;</small>
-      <% else %>
-        <%= @user.name %>
-      <% end %>
-    </p>
-
-    <p>
-      <strong>Email:</strong>
-      <%= @user.email %>
-    </p>
-
-    <p><strong>Talks</strong></p>
-    <ul>
-    <% @user.talks.each do |talk| %>
-      <li><%= link_to talk.title, talk %></li>
-    <% end %>
-    </ul>
-
-    <%= link_to 'Edit', edit_user_path(@user) %> |
-    <%= link_to 'Back', users_path %>
+<div class="col-lg-9 col-md-11">
+  <%= image_tag @user.avatar_url(:normal).to_s %>
+  <div>
+  <p><strong>Name:</strong><%= @user.name %></p>
+  <p><strong>Email:</strong><%= @user.email %></p>
+  <p><%= link_to 'Edit', edit_user_path(@user), class: 'btn btn-primary' %>
+  <%= link_to 'Delete', @user, class: 'btn btn-primary', method: :delete, data: { confirm: 'Are you sure?' } %></p>
+  <p><%= link_to '<i class="fa fa-undo" aria-hidden="true"></i> Back'.html_safe, users_path, class: 'btn btn-primary' %> </p>
   </div>
 </div>
