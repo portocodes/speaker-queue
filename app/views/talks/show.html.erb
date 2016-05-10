@@ -1,44 +1,37 @@
-<%- model_class = Talk -%>
-<div class="container">
-  <div class="page-header">
-    <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
-  </div>
-
-  <dl class="dl-horizontal">
-    <dt><strong><%= model_class.human_attribute_name(:title) %>:</strong></dt>
-    <dd><%= @talk.title %></dd>
-    <dt><strong><%= model_class.human_attribute_name(:description) %>:</strong></dt>
-    <dd><%= @talk.description %></dd>
-    <dt><strong><%= model_class.human_attribute_name(:tag_list) %>:</strong></dt>
-    <dd><%= @talk.tag_list %></dd>
-    <dt><strong><%= model_class.human_attribute_name(:duration) %>:</strong></dt>
-    <dd><%= @talk.duration %></dd>
-    <dt><strong><%= model_class.human_attribute_name(:speaker) %>:</strong></dt>
-    <dd><%= @talk.speaker %></dd>
-    <dt><strong><%= model_class.human_attribute_name(:time_event) %>:</strong></dt>
-    <dd><%= @talk.time_event %></dd>
-    <dt><strong><%= model_class.human_attribute_name(:resource) %>:</strong></dt>
-    <dd>
-      <a href="<%= @talk.resource %>" target="_blank">
-        <span style="font-size: 2em;" class="glyphicon glyphicon-download-alt" aria-label="download file"></span>
-      </a>
-    </dd>
-    <dt><strong><%= model_class.human_attribute_name(:video) %>:</strong></dt>
-    <dd>
-      <a href="<%= @talk.video %>" target="_blank">
-        <span style="font-size: 2em;" class="glyphicon glyphicon-facetime-video" aria-label="watch video"></span>
-      </a>
-    </dd>
-  </dl>
-  <% if current_user && (current_user.role == "moderator" || current_user.id == @talk.user_id) %>
-    <%= link_to t('.back', :default => t("helpers.links.back")),
-                  talks_path, :class => 'btn btn-default'  %>
-    <%= link_to t('.edit', :default => t("helpers.links.edit")),
-                  edit_talk_path(@talk), :class => 'btn btn-default' %>
-    <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-                  talk_path(@talk),
-                  :method => 'delete',
-                  :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-                  :class => 'btn btn-danger' %>
-  <% end %>
+<div class="col-lg-9 col-md-11">
+  <h2>
+    <%= @talk.title %>
+      <small>
+        <%= @talk.time_event %>
+          <span class="hidden-xs hidden-ms">.
+            <a href="<%= @talk.location_coordinates %>" target="_blank" class="brand-tooltip" data-toggle="tooltip" data-placement="right" title="<%= @talk.location_name %>">Where?</a>
+          </span>
+          <a href="<%= @talk.location_coordinates %>" target="_blank"  class="visible-xs visible-ms"><i class="fa fa-map-marker"></i><%= @talk.location_name %></a>
+      </small>
+  </h2>
+    <%= simple_format @talk.description %>
+    <ul class="list-unstyled @talk-details">
+      <li>
+        <strong>Duration:</strong>
+          <%= @talk.duration %> minutes
+      </li>
+      <li>
+        <strong>Speaker:</strong>
+          <%= @talk.speaker %>
+      </li>
+      <% if @talk.tag_list %>
+        <li class="tag-list">
+          <strong>Tags:</strong>
+            <%= raw @talk.tag_list.map { |t| link_to t, tag_path(t) }.join('&nbsp;&nbsp;|&nbsp;&nbsp;') %>
+        </li>
+      <% end %>
+    </ul>
+    <% if @talk.video or @talk.resource %><hr><% end %>
+    <% if @talk.video %>
+      <a href="<%= @talk.video %>" target="_blank" class="btn btn-primary icon icon-video"><span></span> Watch video</a>
+    <% end %>
+    <% if @talk.resource %>
+      <a href="<%= @talk.resource %>" target="_blank" class="btn btn-primary icon icon-download"><span></span> Download</a>
+    <% end %>
+    <%= link_to '<i class="fa fa-undo" aria-hidden="true"></i> Back'.html_safe, talks_path, class: 'btn btn-primary' %>
 </div>
