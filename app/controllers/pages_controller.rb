@@ -1,7 +1,8 @@
 class PagesController < ApplicationController
 
-  def main
+  def landing
     @users = User.all
+    @tags = Talk.all.map {|t| t.tag_list}.flatten.uniq
     if params[:tag]
       @talks = Talk.tagged_with(params[:tag])
     else
