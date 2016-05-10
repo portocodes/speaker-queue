@@ -1,0 +1,83 @@
+<div class="col-lg-9 col-md-11">
+
+  <div class="tag-filters">
+    <div class="btn-group">
+      <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <span>
+        <% if params[:tag] %>
+          <%= params[:tag] %>
+        <% else %>
+          View all
+        <% end %>
+        </span>
+        <i class="fa fa-angle-down"></i>
+      </button>
+      <ul class="dropdown-menu pull-right">
+        <li class="active"><a href="<%= root_path %>">View all</a></li>
+         <% @tags.each do |tag|%>
+              <li><%= link_to tag, tag_path(tag) %></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+
+  <div class="list">
+    <% @talks.each do |talk| %>
+      <% if talk.state == "approved" %>
+        <div class="talk-post">
+          <div class="start">{ <span>// TalkList @ PortoCodes</span></div>
+          <h2>
+            <%= talk.title %>
+            <small>
+              <%= talk.time_event %>
+              <span class="hidden-xs hidden-ms">.
+                <a href="<%= talk.location_coordinates %>" target="_blank" class="brand-tooltip" data-toggle="tooltip" data-placement="right" title="<%= talk.location_name %>">Where?</a>
+              </span>
+              <a href="<%= talk.location_coordinates %>" target="_blank"  class="visible-xs visible-ms"><i class="fa fa-map-marker"></i><%= talk.location_name %></a>
+            </small>
+          </h2>
+          <%= simple_format talk.description %>
+          <ul class="list-unstyled talk-details">
+            <li>
+              <strong>Duration:</strong>
+              <%= talk.duration %> minutes
+            </li>
+            <li>
+              <strong>Speaker:</strong>
+              <%= talk.speaker %>
+            </li>
+            <% if talk.tag_list %>
+             <li class="tag-list">
+              <strong>Tags:</strong>
+                <%= raw talk.tag_list.map { |t| link_to t, tag_path(t) }.join('&nbsp;&nbsp;|&nbsp;&nbsp;') %>
+              </li>
+              <% end %>
+          </ul>
+          <% if talk.video or talk.resource %><hr><% end %>
+          <% if talk.video %>
+          <a href="<%= talk.video %>" target="_blank" class="btn btn-primary icon icon-video"><span></span> Watch video</a>
+          <% end %>
+          <% if talk.resource %>
+          <a href="<%= talk.resource %>" target="_blank" class="btn btn-primary icon icon-download"><span></span> Download</a>
+          <% end %>
+          <div class="end">} <span>// End.TalkList</span></div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+
+</div>
+
+<!-- to allow dropdown to work after being used -->
+<script>
+  $(document).ready(function() {
+    $(".dropdown-toggle").dropdown();
+  });
+
+  $(window).scroll(function (event) {
+      var scroll = $(window).scrollTop();
+      if (scroll > 100) $(".dropdown-toggle").addClass("scrolled");
+      else              $(".dropdown-toggle").removeClass("scrolled");
+      console.log(1);
+  });
+</script>
