@@ -1,25 +1,23 @@
-<div class="col-lg-12">
+<div class="col-lg-12 col-md-11">
 
   <div class="page-header">
-    <h1>Talks</h1>
+    <h1><%= link_to 'Listing Talks', talks_path  %></h1>
   </div>
 
-  <table class="table table-striped">
+  <table class="table table-bordered table-striped">
 
     <thead>
       <tr>
-      <th>Title</th>
-
-      <th>Tag List</th>
-      <th>Duration</th>
-      <th>Requested Month</th>
-      <th>Speaker</th>
-      <th>Scheduled to</th>
-      <th>Where?</th>
-      <th>Location</th>
-      <th>Status</th>
+      <th class ="col-md-3">Title</th>
+      <th class ="col-md-2">Tag List</th>
+      <th class ="col-md-1">Duration</th>
+      <th class ="col-md-1">Requested Month</th>
+      <th >Speaker</th>
+      <th class ="col-md-2">Scheduled to</th>
+      <th class ="col-md-1">Location</th>
+      <th class ="col-md-1">Status</th>
       <% if current_user %>
-      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+      <th class ="col-md-1">Actions</th>
       <% end %>
     </tr>
    </thead>
@@ -31,15 +29,17 @@
 
         <td>
           <span class="tag-color">
-            <%= raw talk.tag_list.map { |t| link_to t, tag_path(t) }.join(', ') %>
+            <%= raw talk.tag_list.map { |t| link_to t, tags_path(t) }.join(', ') %>
           </span>
         </td>
         <td><%= talk.duration %></td>
         <td><%= talk.month %></td>
         <td><%= talk.speaker %></td>
         <td><%= talk.time_event %></td>
-        <td><%= talk.location_name %></td>
-        <td><a href="<%= talk.location_coordinates %>" target="_blank"><i class="fa fa-map-marker fa-2x" aria-hidden="true"></a></i></td>
+
+        <td>
+          <a href="<%= talk.location_coordinates %>" target="_blank class="brand-tooltip" data-toggle="tooltip" data-placement="right" title="<%= talk.location_name %>""><i class="fa fa-map-marker fa-2x" aria-hidden="true"></a></i>
+        </td>
         <td class="dropdown">
           <button class="btn dropdown-toggle status <%= talk.state %>" type="button" data-toggle="dropdown">
             <%= talk.state %>
@@ -47,7 +47,7 @@
             <span class="caret"></span>
           </button>
             <ul class="dropdown-menu">
-              <li class="approved"><%= link_to 'Approve', approve_talk_path(talk), method: :put  %></li>
+              <li class="approved"><%= link_to 'Approve', approve_talk_path(talk), method: :put %></li>
               <li class="rejected"><%= link_to 'Reject',  reject_talk_path(talk),  method: :put %></li>
               <li class="delayed "><%= link_to 'Delay',   delay_talk_path(talk),   method: :put %></li>
               <% end %>
@@ -74,7 +74,7 @@
 
  <div id="tag_cloud">
       <% tag_cloud Talk.tag_counts, %w[s m l] do |tag, css_class| %>
-        <%= link_to tag.name, tag_path(tag.name), class: css_class %>
+        <%= link_to tag.name, tags_path(tag.name), class: css_class %>
     <% end %>
   </div>
 
