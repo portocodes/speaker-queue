@@ -1,0 +1,104 @@
+section#content {
+  margin: 37px 0 70px 455px;
+
+  @include target-sm    { margin: 37px 0 45px 345px }
+  @include target-xs-ms { margin: 120px 20px 45px 20px }
+
+  .tag-filters {
+    position: fixed;
+    top: 45px;
+    right: 0;
+
+    @include target-xs-ms {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+    }
+  }
+
+  .talk-post {
+    margin-bottom: 35px;
+
+    &:after, .end, .start {
+      display: none;
+      margin-top: 35px;
+      font-size: 36px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: $brand-primary;
+    }
+
+    .start { margin-top: 0; margin-bottom: 35px; }
+
+    .end span, .start span {
+      font-family: $font-title;
+      color: $gray-light;
+      font-weight: 500;
+      font-size: 20px;
+      vertical-align: middle;
+    }
+
+    &:after {
+      content: "} {";
+      display: block;
+    }
+
+    &:first-child {
+      .start  { display: block }
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+
+      &:after { display: none }
+      .end    { display: block }
+    }
+
+    p {
+      padding-right: 40px;
+      @include target-xs-ms { padding-right: 0; }
+
+    }
+
+    ul.talk-details {
+      margin-bottom: 25px;
+
+      li {
+        color: $gray-dark;
+        line-height: 160%;
+        font-weight: 400;
+        font-size: 15px;
+
+        &.tag-list {
+          color: $gray-light;
+        }
+
+        strong {
+          font-family: $font-title;
+          color: $brand-primary;
+          font-size: 16px;
+          font-weight: 700;
+          text-transform: uppercase;
+          width: 77px;
+          display: inline-block;
+        }
+
+        a {
+          font-family: $font-title;
+          color: $gray-dark;
+          font-size: 15px;
+          font-weight: 700;
+          text-transform: uppercase;
+          padding-bottom: 1px;
+          line-height: 100%;
+          border-bottom: solid 2px transparent;
+
+          &:hover, &:focus, &:active, &.active {
+            color: $brand-primary;
+            border-color: $brand-primary;
+          }
+        }
+      }
+    }
+  }
+}
