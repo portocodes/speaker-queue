@@ -11,7 +11,7 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :avatar %><br>
+    <%= f.label :avatar, class: 'control-label' %><br>
     <%= f.file_field :avatar, :id => 'inputFile' %>
     <% if @user.avatar? %>
     <%= image_tag @user.avatar_url(:normal).to_s, class: "image_upload_preview" %>
@@ -21,33 +21,33 @@
   </div>
 
     <div class="field">
-    <%= f.label :remote_avatar_url, "or image url" %><br>
+    <%= f.label :remote_avatar_url, "or image url", class: 'control-label' %><br>
     <%= f.text_field :remote_avatar_url %>
   </div>
   <p>
-    <label>
+    <label >
       <%= f.check_box :remove_avatar if current_user %>
       <%= f.label "Remove Avatar" if current_user %>
     </label>
   </p>
   <div class="field">
-    <%= f.label :name %><br>
+    <%= f.label :name, class: 'control-label' %><br>
     <%= f.text_field :name %>
   </div>
 
   <div class="field">
-    <%= f.label :email %><br>
+    <%= f.label :email, class: 'control-label' %><br>
     <%= f.email_field :email %>
   </div>
 
   <% if can? :manage, User %>
   <div class="field">
-    <%= f.label :role %><br>
+    <%= f.label :role, class: 'control-label' %><br>
     <%= f.collection_select :role, User::ROLES, :to_s, :humanize %>
   </div>
   <% end %>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit nil, class: 'btn btn-primary' %>
   </div>
 <% end %>
