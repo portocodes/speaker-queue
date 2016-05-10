@@ -24,17 +24,9 @@ class TalksController < ApplicationController
   def index
     @users = User.all
     if params[:tag]
-      if current_user.role == "moderator"
-        @talks = Talk.tagged_with(params[:tag])
-      else
-        @talks = current_user.talks.tagged_with(params[:tag])
-      end
+      @talks = Talk.tagged_with(params[:tag])
     else
-      if current_user.role == "moderator"
-        @talks = Talk.all
-      else
-        @talks = current_user.talks.all
-      end
+      @talks = Talk.all
     end
   end
 
@@ -93,28 +85,28 @@ class TalksController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_talk
-      @talk = Talk.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_talk
+    @talk = Talk.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def talk_params
-      params.require(:talk).permit(
-                                  :title,
-                                  :description,
-                                  :duration,
-                                  :month,
-                                  :speaker,
-                                  :state,
-                                  :tag_list,
-                                  :video,
-                                  :resource,
-                                  :time_event,
-                                  :talk_date,
-                                  :talk_time,
-                                  :location_name,
-                                  :location_coordinates
-                                  )
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def talk_params
+    params.require(:talk).permit(
+      :title,
+      :description,
+      :duration,
+      :month,
+      :speaker,
+      :state,
+      :tag_list,
+      :video,
+      :resource,
+      :time_event,
+      :talk_date,
+      :talk_time,
+      :location_name,
+      :location_coordinates
+    )
+  end
 end
