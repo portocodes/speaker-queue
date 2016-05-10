@@ -10,5 +10,4 @@ document.addEventListener("visibilitychange", function(event){
 //Tooltip
 $(function () {
   $('[data-toggle="tooltip"]').tooltip();
-  console.log(1);
 });
