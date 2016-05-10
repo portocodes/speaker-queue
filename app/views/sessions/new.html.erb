@@ -1,8 +1,8 @@
-<h1>Log in</h1>
-<p>
+<h1 class="">Log in</h1>
+<div class='field'>
   <%= form_tag sessions_path do %>
-    <%= label_tag :email %>
+    <span class='control-label'><%= label_tag :email %></span>
     <%= email_field_tag :email, params[:email], required: true, autofocus: true %>
-    <%=  submit_tag "Log In" %>
+    <%=  submit_tag "Log In", class: 'btn btn-primary' %>
   <% end %>
-</p>
+</div>
