@@ -1,0 +1,16 @@
+<a href="<%= talks_path %>" id ="panel-talks">
+  <div class="col-xs-12 col-sm-4 col-md-4">
+    <div class="thumbnail">
+      <img src="http://placehold.it/500x250/EEE">
+        <div class="caption">
+          <% if current_user.role == "moderator" %>
+            <h4>Talks Manager</h4>
+            <p>Manage all the talks that have been submitted to our Speaker Queue. In here you can update content, change the status and set the time event for every talk.</p>
+          <% else %>
+            <h4>Manage your Talks</h4>
+            <p>Manage your submitted talks while they are under evaluation to be accepted or rejected. In that period you can change the content of your talk proposal.</p>
+          <% end %>
+      </div>
+    </div>
+  </div>
+</a>

@@ -1,0 +1,10 @@
+<div class="col-xs-12">
+  <h1>Dashboard</h1>
+</div>
+<% if can? :update, Talk %>
+    <%= render "dashboards/panels/talks" %>
+<% end %>
+<% if can? :manage, User %>
+    <%= render "dashboards/panels/users" %>
+<% end %>
+

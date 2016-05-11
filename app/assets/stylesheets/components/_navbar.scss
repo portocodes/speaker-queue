@@ -1,0 +1,308 @@
+nav.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 380px;
+  background-color: $brand-primary;
+  border: 0;
+  z-index: 10;
+  @include border-radius(0);
+  -webkit-backface-visibility: hidden;
+
+  @include target-sm { width: 300px }
+  @include target-xs-ms {
+    height: 90px;
+    width: 100%;
+  }
+  .navbar-toggle {
+      position: relative;
+      float: left;
+      background-color: $brand-primary-darkest;
+      @include border-radius(0);
+      border: solid 2px transparent;
+      margin: 23px 25px 23px 35px;
+      height: 44px;
+
+      .icon-bar {
+        height: 2px;
+        background-color: $white;
+      }
+
+      &.collapsed {
+        background-color: $brand-primary-darker;
+      }
+
+      &:hover, &:focus {
+        background-color: $brand-primary-darkest;
+      }
+  }
+
+  .navbar-header {
+    float: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 50%;
+    width: 100%;
+    background-color: $brand-primary-dark;
+
+    @include target-xs-ms { height: 100%; background-color: transparent }
+
+    .navbar-brand {
+      float: none;
+      padding: 0 65px 45px 65px;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      margin-left: 0;
+      height: auto;
+
+      @include target-sm    { padding: 0 45px 45px 45px }
+      @include target-xs-ms {
+        position: relative;
+        bottom: auto;
+        left: auto;
+        padding: 32px 0;
+        width: auto;
+        display: inline-block;
+       }
+
+
+      img {
+        @include target-xs-ms { width: 225px; }
+
+      }
+    }
+
+  }
+
+  .navbar-collapse {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 40px 65px 0 65px;
+
+    @include target-sm-lg { height: 50% !important }
+    @include target-sm { padding: 40px 45px 0 45px }
+    @include target-xs-ms {
+      position: relative;
+      bottom: auto;
+      left: auto;
+      padding: 0;
+      margin-top: 90px;
+      background-color: $brand-primary-darker;
+      border: 0;
+      text-align: center;
+    }
+
+    .navbar-collapse-pad {
+      @include target-xs-ms { padding: 45px 25px }
+    }
+
+    p {
+      color: $white;
+      @include target-xs-ms { margin-bottom: 10px }
+    }
+
+    hr {
+      border: solid 1px $white;
+      @include target-xs-ms { margin-right: auto; margin-left: auto }
+    }
+
+    .navbar-nav {
+      float: none;
+      margin: 0 0 25px 0;
+
+      li {
+
+        a:not(.btn-primary) {
+          font-family: $font-title;
+          padding: 0;
+          color: $white;
+          font-weight: 700;
+          text-transform: uppercase;
+          font-size: 16px;
+          margin-right: 15px;
+
+          @include target-xs-ms { margin-right:0 }
+
+          &:hover, &:focus, &:active, &.active { opacity: 0.75 }
+        }
+
+      }
+
+    }
+
+    ul.social {
+      margin: 0;
+
+      li {
+        padding: 0 10px 0 0;
+        @include target-xs-sm { padding: 0 4px 0 4px }
+
+        a {
+          color: $white;
+          background-color: $brand-primary-dark;
+          width: 38px;
+          height: 38px;
+          display: inline-block;
+          text-align: center;
+          vertical-align: top;
+
+          @include target-xs-ms {
+            height: 44px;
+            width: 44px;
+            background-color: $brand-primary-darkest;
+          }
+
+          &:hover, &:focus, &:active, &.active {
+            background-color: $brand-primary-darker;
+
+            @include target-xs-ms {
+              background-color: $brand-primary;
+            }
+          }
+
+          i {
+            display: inline-block;
+            vertical-align: middle;
+            margin-top: 7px;
+
+            @include target-xs-ms { margin-top: 8px }
+
+            &.fa {
+              font-size: 22px;
+              @include target-xs-ms { font-size: 26px;  }
+
+              &.fa-slack {
+                font-size: 19px;
+                margin-top: 10px;
+                @include target-xs-ms { font-size: 22px; margin-top: 11px }
+              }
+            }
+
+            &.fa-meetup {
+              background-image: image-url("fa-meetup.svg");
+              background-repeat: no-repeat;
+              background-position: center center;
+              width: 18px;
+              height: 18px;
+              margin-top: 9px;
+              @include target-xs-ms { width: 21px; height: 21px; margin-top: 11px }
+            }
+          }
+        }
+      }
+    }
+
+  }
+
+  .profile {
+    top: 5px;
+
+    ul {
+      &.logged-out {
+        li {
+          &:nth-child(2) {
+            @include target-sm { clear: left }
+          }
+
+          a {
+            margin-top: 8px;
+
+            &.btn-primary {
+              margin-top: 0px;
+              margin-right: 18px;
+            }
+          }
+        }
+      }
+
+      li {
+        display: block;
+
+        .profile-image {
+          width: 50px;
+          height: 50px;
+          background-position: center center;
+          background-size: cover;
+          @include border-radius(50%);
+          display: inline-block;
+          position: absolute;
+          top: 0;
+          left: 0;
+
+          @include target-xs-ms {
+            position: relative;
+            display: inline-block;
+            width: 65px;
+            height: 65px;
+          }
+        }
+
+        div {
+          padding-left: 65px;
+          display: block;
+          min-height: 50px;
+          display: table;
+          margin-bottom: 15px;
+
+          @include target-xs-ms {
+            min-height: 40px;
+            padding: 0;
+            margin-right: auto;
+            margin-left: auto;
+          }
+
+          >span {
+            color: $white;
+            font-size: 16px;
+            line-height: 140%;
+            font-weight: 300;
+            vertical-align: middle;
+            display: table-cell;
+
+            span {
+              margin-right: 6px;
+
+            }
+            a.logout{
+              margin: 0;
+            }
+          }
+        }
+
+        .btn-primary {
+          display: inline-block;
+          color: $white;
+          background-color: $brand-primary-darker;
+          padding: 7px 12px 10px;
+          margin-bottom: 8px;
+
+          @include target-xs-ms {
+            margin-right: 9px !important;
+            margin-left: 9px !important;
+            background-color: $brand-primary-darkest;
+            min-width: 120px;
+          }
+
+          @include target-xs-sm { padding: 8px 12px 10px }
+
+          &:hover, &:focus, &:active, &.active {
+            background-color: $brand-primary-darkest;
+            @include target-xs-ms {
+              background-color: $brand-primary;
+            }
+          }
+        }
+
+      }
+    }
+  }
+
+}
+
+

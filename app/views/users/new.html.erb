@@ -1,9 +1,10 @@
 <% content_for :head do %>
-  <title>Sign Up</title>
+  <title>New User</title>
 <% end %>
 
 <div class="container">
   <h1>New User</h1>
   <%= render 'form' %>
-  <%= link_to 'Back', users_path %>
+  </br>
+  <%= link_to '<i class="fa fa-undo" aria-hidden="true"></i> Back'.html_safe, users_path, class: 'btn btn-primary' %>
 </div>

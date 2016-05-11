@@ -1,37 +1,106 @@
-<div class="container">
- <h1>SUBMIT A NEW TALK & SIGN UP</h1>
-  <div class="col-lg-6">
-    <%= form_for @user, :html => { :class => "form-horizontal talk" } do |f| %>
-      <div class="form-group">
-        <%= f.label :name %><br />
-        <%= f.text_field :name, autofocus: true %>
-      </div>
-      <div class="form-group">
-        <%= f.label :email %><br />
-        <%= f.email_field :email %>
-      </div>
-      <%= f.fields_for :talks  do |ff| %>
-        <div class="form-group">
-          <%= ff.label :title, :class => 'control-label ' %>
-          <%= ff.text_field :title, :class => 'form-control' %>
-        </div>
-        <div class="form-group">
-          <%= ff.label :description, :class => 'control-label ' %>
-          <%= ff.text_area :description, cols: "30", rows: "10", :class => 'form-control' %>
-        </div>
+<div class="col-lg-8">
 
-        <div class="form-group">
-          <%= ff.label :duration, :class => 'control-label ' %>
-          <%= ff.number_field :duration, :class => 'form-control', :size => "10", max: 30 %>
-        </div>
-        <div class="form-group">
-          <%= ff.label :speaker, :class => 'control-label ' %>
-          <%= ff.text_field :speaker, :class => 'form-control' %>
+  <h1>Join Us</h1>
+    <h3>First, tell us who you are</h3>
+    <%= form_for @user, html: { multipart: true } do |f| %>
+
+      <% if @user.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+          <ul>
+          <% @user.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+          </ul>
         </div>
       <% end %>
-    <div class="form-group">
-      <%= f.submit "Sign Up & Submit Your First Talk", :class => 'btn btn-primary' %>
+
+      <div class="field">
+        <%= f.label :avatar, class: 'control-label' %><br>
+        <%= f.file_field :avatar, :id => 'inputFile' %>
+        <% if @user.avatar? %>
+        <%= image_tag @user.avatar_url(:normal).to_s, class: "image_upload_preview" %>
+        <% else %>
+        <%= image_tag "http://placehold.it/200x200", size: "200", class: "image_upload_preview" %>
+        <% end %>
+      </div>
+
+        <div class="field">
+        <%= f.label :remote_avatar_url, "or image url", class: 'control-label' %><br>
+        <%= f.text_field :remote_avatar_url %>
+      </div>
+
+      <div class="field">
+        <%= f.label :name, class: 'control-label' %><br>
+        <%= f.text_field :name %>
+      </div>
+
+      <div class="field">
+        <%= f.label :email, class: 'control-label' %><br>
+        <%= f.email_field :email %>
+      </div>
+
+      <% if can? :manage, User %>
+      <div class="field">
+        <%= f.label :role, class: 'control-label' %><br>
+        <%= f.collection_select :role, User::ROLES, :to_s, :humanize %>
+      </div>
+      <% end %>
+
+    <h3>What would you like to talk?</h3>
+
+    <%= f.fields_for :talks  do |ff| %>
+
+      <% if @talk.errors.any? %>
+        <div id="error_expl" class="panel panel-danger">
+          <div class="panel-heading">
+            <h3 class="panel-title"><%= pluralize(@talk.errors.count, "error") %>
+              prohibited this talk from being saved:</h3>
+          </div>
+          <div class="panel-body">
+            <ul>
+              <% @talk.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      <% end %>
+
+      <div class="field">
+        <%= ff.label :title, class: 'control-label' %>
+        <%= ff.text_field :title, class: 'form-control', required: true %>
+      </div>
+
+      <div class="field">
+        <%= ff.label :description, class: 'control-label' %>
+        <%= ff.text_area :description, cols: "30", rows: "10", class: 'form-control', required: true %>
+      </div>
+
+      <div class="field">
+        <%= ff.label :tag_list, class: 'control-label' %>
+        <%= ff.text_field :tag_list, value: @talk.tag_list.to_s, :placeholder => "Separated by comas", class: 'form-control' %>
+      </div>
+
+      <div class="field">
+        <%= ff.label 'Duration:', class: 'control-label' %>
+        <%= ff.select :duration, [5, 15, 30, 45] %><strong> minutes</strong>
+      </div>
+
+      <div class="field">
+        <%= ff.label 'Month:', class: 'control-label' %>
+        <%= select_month(Date.today) %>
+      </div>
+
+      <div class="field">
+        <%= ff.label :speaker, class: 'control-label' %>
+        <%= ff.text_field :speaker, class: 'form-control', required: true %>
+      </div>
+
+    <% end %>
+
+    <div class="field">
+      <%= f.submit "Sign Up & Submit Your First Talk", class: 'btn btn-primary' %>
     </div>
   <% end %>
 </div>
-

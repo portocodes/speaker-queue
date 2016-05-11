@@ -1,27 +1,81 @@
-<%- model_class = Talk %>
-<div class="container">
-  <div class="row">
-    <div class="col-lg-12">
-      <% if can? :manage, User %>
-        <%= render template: "users/index" %>
-      <% end %>
+<div class="col-lg-12 col-md-11">
 
-      <%= render "talks/partials/talk" %>
-
-      <% if current_user %>
-        <%= link_to t('.new', :default => t("helpers.links.new")),
-                    new_talk_path,
-                    :class => 'btn btn-primary' %>
-        <% else %>
-        <%= link_to t('.submit', :default => t("helpers.links.submit a new talk")),
-                    submit_path,
-                    :class => 'btn btn-primary' %>
-      <% end %>
-      <div id="tag_cloud">
-        <% tag_cloud Talk.tag_counts, %w[s m l] do |tag, css_class| %>
-          <%= link_to tag.name, tag_path(tag.name), class: css_class %>
-        <% end %>
-      </div>
-    </div>
+  <div class="page-header">
+    <h1><%= link_to 'Listing Talks', talks_path  %></h1>
   </div>
+
+  <table class="table table-bordered table-striped">
+
+    <thead>
+      <tr>
+      <th class ="col-md-3">Title</th>
+      <th class ="col-md-2">Tag List</th>
+      <th class ="col-md-1">Duration</th>
+      <th class ="col-md-1">Requested Month</th>
+      <th >Speaker</th>
+      <th class ="col-md-2">Scheduled to</th>
+      <th class ="col-md-1">Location</th>
+      <th class ="col-md-1">Status</th>
+      <% if current_user %>
+      <th class ="col-md-1">Actions</th>
+      <% end %>
+    </tr>
+   </thead>
+
+   <tbody>
+    <% @talks.each do |talk| %>
+      <tr>
+        <td><%= link_to talk.title, talk_path(talk.id) %></td>
+
+        <td>
+          <span class="tag-color">
+            <%= raw talk.tag_list.map { |t| link_to t, tags_path(t) }.join(', ') %>
+          </span>
+        </td>
+        <td><%= talk.duration %></td>
+        <td><%= talk.month %></td>
+        <td><%= talk.speaker %></td>
+        <td><%= talk.time_event %></td>
+
+        <td>
+          <a href="<%= talk.location_coordinates %>" target="_blank class="brand-tooltip" data-toggle="tooltip" data-placement="right" title="<%= talk.location_name %>""><i class="fa fa-map-marker fa-2x" aria-hidden="true"></a></i>
+        </td>
+        <td class="dropdown">
+          <button class="btn dropdown-toggle status <%= talk.state %>" type="button" data-toggle="dropdown">
+            <%= talk.state %>
+            <% if can? :update_states, Talk %>
+            <span class="caret"></span>
+          </button>
+            <ul class="dropdown-menu">
+              <li class="approved"><%= link_to 'Approve', approve_talk_path(talk), method: :put %></li>
+              <li class="rejected"><%= link_to 'Reject',  reject_talk_path(talk),  method: :put %></li>
+              <li class="delayed "><%= link_to 'Delay',   delay_talk_path(talk),   method: :put %></li>
+              <% end %>
+            </ul>
+
+        <% if current_user && (current_user.role == "moderator" || current_user.id == talk.user_id) %>
+        <td>
+          <%= link_to '<i class="fa fa-pencil-square-o"></i>'.html_safe,
+                      edit_talk_path(talk), :class => 'btn btn-default btn-md',
+                      :title => 'Edit' %>
+          <%= link_to '<i class="fa fa-ban"></i>'.html_safe,
+                      talk_path(talk),
+                      :method => :delete,
+                      :data => { :confirm => ('Are you sure?') },
+                      :class => 'btn btn-md btn-danger',
+                      :title => 'Delete' %>
+        </td>
+      <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+
+</table>
+
+ <div id="tag_cloud">
+      <% tag_cloud Talk.tag_counts, %w[s m l] do |tag, css_class| %>
+        <%= link_to tag.name, tags_path(tag.name), class: css_class %>
+    <% end %>
+  </div>
+
 </div>

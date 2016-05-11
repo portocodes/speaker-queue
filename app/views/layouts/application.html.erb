@@ -11,19 +11,21 @@
     <% if content_for?(:head) %>
        <%= content_for(:head) %>
     <% else %>
-      <title>Porto Codes' Speaker Queue</title>
+      <title>PortoCodes</title>
     <% end %>
-
     <%= render "layouts/components/flash" %>
-
     <%= render "layouts/components/navbar" %>
 
-    <%= render "layouts/components/sidebar" %>
-
     <main role="main">
-      <%= yield %>
+      <section id="content">
+       <div class="container-fluid">
+         <div class="row">
+            <%= yield %>
+          </div>
+        </div>
+      </section>
     </main>
-
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-beta1/jquery.min.js"></script>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   </body>
 </html>

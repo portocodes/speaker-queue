@@ -1,17 +1,48 @@
 <nav class="navbar navbar-default">
-    <div class="container">
-      <div class="navbar-header">
-        <a class="navbar-brand" href="/">PortoCodes</a>
-      </div>
-      <ul class="nav navbar-nav">
-        <% if current_user %>
-          <li><%= image_tag current_user.avatar_url(:thumb).to_s %></li>
-          <li class="active"><a href="<%= user_path(current_user.id) %>">Hello <%= current_user.name %></a></li>
-          <li><%= link_to 'Log Out', logout_path %></li>
-        <% else %>
-          <li><%= link_to "Log In", login_path %></li>
-          <li><%= link_to "Sign Up", signup_path %></li>
-        <% end %>
-      </ul>
-    </div>
-  </nav>
+
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      <div class ="collapse navbar-collapse profile">
+        <%= render 'layouts/components/nav_profile' %>
+     </div>
+
+      <a class="navbar-brand" href="<%= root_path %>"><%= image_tag("logo.svg", :alt => "Porto Codes", class: "img-responsive") %></a>
+    </div> <!-- /.navbar-header -->
+
+    <div class="collapse navbar-collapse" id="navbar-collapse">
+
+        <div class="navbar-collapse-pad">
+
+
+          <div class ="profile visible-xs visible-ms">
+             <%= render 'layouts/components/nav_profile' %>
+         </div>
+
+          <hr class="visible-xs visible-ms" />
+
+          <p>We are a group of software enthusiasts that meet every month to share experiences.</p>
+
+          <ul class="nav navbar-nav">
+              <li><%= link_to 'More about us', about_us_path %></li>
+          </ul>
+
+          <hr />
+
+          <ul class="list-inline social">
+            <li><a href="https://portorb.herokuapp.com/" target="_blank" class="brand-tooltip" data-toggle="tooltip" data-placement="bottom" title="Slack"><i class="fa fa-slack"></i></a></li>
+            <li><a href="https://www.meetup.com/portocodes" target="_blank" class="brand-tooltip" data-toggle="tooltip" data-placement="bottom" title="Meetup"><i class="fa-meetup"></i></a></li>
+            <li><a href="https://github.com/portocodes" target="_blank" class="brand-tooltip" data-toggle="tooltip" data-placement="bottom" title="Github"><i class="fa fa-github"></i></a></li>
+            <li><a href="https://www.youtube.com/channel/UC1zSOKJl5DhQmlxtEfPGrvw" target="_blank" class="brand-tooltip" data-toggle="tooltip" data-placement="bottom" title="Youtube"><i class="fa fa-youtube"></i></a></li>
+          </ul>
+
+        </div>
+
+    </div><!-- /.navbar-collapse -->
+
+</nav>

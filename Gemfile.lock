@@ -105,7 +105,9 @@ GEM
     mini_portile2 (2.0.0)
     minitest (5.8.4)
     multi_json (1.11.2)
-    mysql2 (0.4.3)
+    nilify_blanks (1.2.1)
+      activerecord (>= 3.0.0)
+      activesupport (>= 3.0.0)
     nokogiri (1.6.7.2)
       mini_portile2 (~> 2.0.0.rc2)
     pry (0.10.3)
@@ -211,7 +213,7 @@ DEPENDENCIES
   jquery-rails
   jquery-turbolinks
   jquery-ui-rails
-  mysql2
+  nilify_blanks
   pry
   rails (= 4.2.3)
   rake

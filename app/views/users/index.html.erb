@@ -1,33 +1,33 @@
-<div class="page-header">
-  <h1>Listing Users</h1>
-</div>
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Profile Picture</th>
-      <th>Name</th>
-      <th>Email</th>
-      <th>Role</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<div class="col-lg-9 col-md-11">
+  <% if current_user %>
+    <div class="page-header">
+      <h1>Listing Users</h1>
+    </div>
+    <table class="table table-bordered table-striped">
+      <thead>
+        <tr>
+          <th class="col-md-2">Profile Picture</th>
+          <th class="col-md-4">Name</th>
+          <th class="col-md-4">Email</th>
+          <th class="col-md-2">Role</th>
+        </tr>
+      </thead>
 
-  <tbody>
-    <% @users.each do |user| %>
-      <tr>
-        <td><%= image_tag user.avatar_url(:thumb).to_s %></td>
-        <td><%= user.name %></td>
-        <td><%= user.email %></td>
-        <td><%= user.role %></td>
-        <td><%= link_to 'Show', user %></td>
-        <td><%= link_to 'Edit', edit_user_path(user) %></td>
-        <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+      <tbody>
+        <% @users.each do |user| %>
+          <tr>
+            <td><%= image_tag user.avatar_url(:thumb).to_s, size: '50x50' %></td>
+            <td><%= link_to user.name, user %></td>
+            <td><%= user.email %></td>
+            <td><%= user.role %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+
+    <br>
+    <% if can? :manage, User %>
+    <%= link_to 'New User', new_user_path, class: 'btn btn-primary' %>
     <% end %>
-  </tbody>
-</table>
-
-<br>
-<% if can? :manage, User %>
-<%= link_to 'New User', new_user_path %>
-<% end %>
+  <% end %>
+</div>
