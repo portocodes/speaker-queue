@@ -28,6 +28,7 @@ end
 group :development, :test do
   gem 'codeclimate-test-reporter'
   gem 'rake'
+  gem 'sqlite3'
   gem 'byebug'
   gem 'spring'
 end
