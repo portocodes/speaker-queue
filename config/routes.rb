@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
   get  'signup',   to: 'users#new',        as: 'signup'
   get  'login' ,   to: 'sessions#new',     as: 'login'
+  get  'login/*token' , to: 'sessions#login', as: 'login_token', format: false
   get  'logout',   to: 'sessions#destroy', as: 'logout'
 
   get 'tags/:tag', to: 'pages#landing',      as: :tag

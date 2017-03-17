@@ -19,17 +19,9 @@ module SpeakerQueue
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
+    config.autoload_paths << "#{Rails.root}/app/services"
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
     config.active_record.raise_in_transactional_callbacks = true
-    ActionMailer::Base.smtp_settings = {
-      :address              => "smtp.gmail.com",
-      :port                 => 587,
-      :domain               => "mail.google.com",
-      :user_name            => ENV['GMAIL_USERNAME'],
-      :password             => ENV['GMAIL_PASSWORD'],
-      :authentication       => 'LOGIN',
-      :enable_starttls_auto => true
-      }
   end
 end
