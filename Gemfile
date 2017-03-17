@@ -17,8 +17,6 @@ gem 'state_machines'
 gem 'state_machines-activerecord'
 gem 'acts-as-taggable-on', '~> 3.4'
 gem 'cancancan', '~> 1.10'
-gem "carrierwave", git: 'https://github.com/carrierwaveuploader/carrierwave.git', branch: '0.11-stable'
-gem 'rmagick'
 gem 'bootstrap-sass', '~> 3.3.6'
 gem "nilify_blanks"
 
