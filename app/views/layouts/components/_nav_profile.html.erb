@@ -1,26 +1,22 @@
 <% if current_user %>
   <ul class="nav navbar-nav logged-in">
     <li>
-      <a href="<%= user_path(current_user.id) %>"
+      <a href="<%= preferences_path %>"
          class="profile-image"
          style="background-image: url('<%= current_user.avatar %>')"></a>
       <div>
         <span>
-          <span>Hello <%= current_user.name %></span>
-          <%= link_to '(Logout)', logout_path, class: "logout" %>
+          <span><%= current_user.name || current_user.email %></span>
+          <%= link_to 'Logout', logout_path, class: "logout" %>
         </span>
       </div>
-      <% if current_page?(:controller => 'pages', :action => 'landing') %>
-        <%= link_to 'Dashboard', dashboard_path, class: 'btn btn-primary'  %>
-      <% else %>
-        <%= link_to 'Homepage', root_path, class: 'btn btn-primary'  %>
-      <% end %>
+      <%= link_to 'Preferences', preferences_path, class: 'btn btn-primary' %>
       <%= link_to 'Submit Talk', new_talk_path, class: 'btn btn-primary' %>
     </li>
   </ul>
 <% else %>
   <ul class= "nav navbar-nav logged-out">
-    <li><%= link_to 'Submit Talk', submit_path, :class => 'btn btn-primary' %></li>
+    <li><%= link_to 'Submit Talk', new_talk_path, :class => 'btn btn-primary' %></li>
     <li><%= link_to "Log In", login_path %></li>
   </ul>
 <% end %>
