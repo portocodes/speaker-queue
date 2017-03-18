@@ -17,7 +17,7 @@
     </p>
   <% else %>
     <% @talks.each do |talk| %>
-      <p><%= talk.title %></p>
+      <p><%= link_to talk.title, talk %></p>
     <% end %>
   <% end %>
 </div>
