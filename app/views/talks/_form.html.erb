@@ -29,7 +29,7 @@
 
   <div class="field">
     <%= f.label :tag_list, class: 'control-label' %>
-    <%= f.text_field :tag_list, value: @talk.tag_list.to_s, :placeholder => "Separated by comas", class: 'form-control' %>
+    <%= f.text_field :tag_list, value: @talk.tag_list.to_s, :placeholder => "Separated by commas", class: 'form-control' %>
   </div>
 
   <div class="field">
@@ -66,11 +66,6 @@
       <%= f.text_field :resource, class: 'form-control' %>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= f.label :speaker, class: 'control-label' %>
-    <%= f.text_field :speaker, class: 'form-control', required: true %>
-  </div>
 
   <div class="field">
     <%= f.submit nil, class: 'btn btn-primary' %>

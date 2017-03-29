@@ -3,37 +3,23 @@ class TalksController < ApplicationController
   before_filter :authorize, only: [:edit, :update, :destroy]
   before_action :set_talk, only: [:show, :edit, :update, :destroy]
 
-  def approve
-    @talk = Talk.find(params[:id])
-    @talk.approve
-    redirect_to talks_path
-  end
-
-  def reject
-    @talk = Talk.find(params[:id])
-    @talk.reject
-    redirect_to talks_path
-  end
-
-  def delay
-    @talk = Talk.find(params[:id])
-    @talk.delay
-    redirect_to talks_path
-  end
-
   def index
-    @users = User.all
-    if params[:tag]
-      @talks = Talk.tagged_with(params[:tag])
-    else
-      @talks = Talk.all
-    end
+    @approved_talks = Talk.where(state: 'approved')
+    @pending_talks = Talk.where(state: 'pending')
   end
 
   def show
   end
 
   def new
+    if !current_user
+      flash[:notice] = "Please login before submitting a talk"
+      redirect_to login_path
+    elsif current_user.name.blank?
+      flash[:notice] = "Please add a name"
+      redirect_to preferences_path(from: 'new-talk')
+    end
+
     @talk = Talk.new
   end
 
@@ -41,7 +27,6 @@ class TalksController < ApplicationController
     @talk = current_user.talks.new(talk_params)
     respond_to do |format|
       if @talk.save
-        # TalkMailer.talk_created(@user).deliver_later
         format.html { redirect_to talks_path, notice:  "You have added a new talk. Good for you!!" }
         format.json { render :show, status: :created, location: @talk }
       else

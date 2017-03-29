@@ -1,9 +1,23 @@
 <% content_for :head do %>
   <title><%= @user.name %>'s profile </title>
 <% end %>
+
 <div class="container">
-<h1>Edit Your Profile</h1>
+  <h2>Edit Your Profile</h2>
   <%= render 'form' %>
-  <%= link_to 'Show', @user %> |
-  <%= link_to 'Back', users_path %>
+</div>
+
+<div class="container">
+  <h2>Submitted talks</h2>
+
+  <% if @talks.empty? %>
+    <p>
+      You haven't submitted any talks yet :(
+      <%= link_to 'Submit a talk', new_talk_path, class: 'btn btn-primary' %>
+    </p>
+  <% else %>
+    <% @talks.each do |talk| %>
+      <p><%= link_to talk.title, talk %></p>
+    <% end %>
+  <% end %>
 </div>
