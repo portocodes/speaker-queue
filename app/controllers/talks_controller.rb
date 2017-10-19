@@ -1,6 +1,6 @@
 class TalksController < ApplicationController
   load_and_authorize_resource
-  before_filter :authorize, only: [:edit, :update, :destroy]
+  before_action :authorize, only: [:edit, :update, :destroy]
   before_action :set_talk, only: [:show, :edit, :update, :destroy]
 
   def index
