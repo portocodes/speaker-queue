@@ -1,6 +1,4 @@
 language: ruby
-script:
-- bundle exec rake db:test:prepare
 addons:
   code_climate:
     repo_token: ENV['CODECLIMATE_REPO_TOKEN']
