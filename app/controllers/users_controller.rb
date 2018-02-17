@@ -6,20 +6,14 @@ class UsersController < ApplicationController
   def update
     @user = current_user
 
-    respond_to do |format|
-      if @user.update(user_params)
-        format.html {
-          if params[:from] == 'new-talk'
-            redirect_to new_talk_path, notice: 'Preferences updated.'
-          else
-            redirect_to root_path, notice: 'Preferences updated.'
-          end
-        }
-        format.json { render :show, status: :ok, location: @user }
+    if @user.update(user_params)
+      if params[:from] == 'new-talk'
+        redirect_to new_talk_path, notice: 'Preferences updated.'
       else
-        format.html { render :edit }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+        redirect_to root_path, notice: 'Preferences updated.'
       end
+    else
+      render :edit
     end
   end
 

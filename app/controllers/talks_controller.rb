@@ -23,16 +23,12 @@ class TalksController < ApplicationController
   def create
     @talk = current_user.talks.new(talk_params)
 
-    respond_to do |format|
-      if @talk.save
-        TalkMailer.talk_created(@talk).deliver!
+    if @talk.save
+      TalkMailer.talk_created(@talk).deliver!
 
-        format.html { redirect_to talks_path, notice:  "You have added a new talk. Good for you!!" }
-        format.json { render :show, status: :created, location: @talk }
-      else
-        format.html { render :new }
-        format.json { render json: @talk.errors, status: :unprocessable_entity }
-      end
+      redirect_to talks_path, notice:  "You have added a new talk. Good for you!!"
+    else
+      render :new
     end
   end
 
@@ -46,14 +42,10 @@ class TalksController < ApplicationController
   end
 
   def update
-    respond_to do |format|
-      if @talk.update(talk_params)
-        format.html { redirect_to talks_path, notice: 'Talk was successfully updated.' }
-        format.json { render :show, status: :ok, location: @talk }
-      else
-        format.html { render :edit }
-        format.json { render json: @talk.errors, status: :unprocessable_entity }
-      end
+    if @talk.update(talk_params)
+      redirect_to talks_path, notice: 'Talk was successfully updated.'
+    else
+      render :edit
     end
   end
 
@@ -62,10 +54,7 @@ class TalksController < ApplicationController
       redirect_to talks_path, :alert => "You are not authorized to perform that action."
     else
       @talk.destroy
-      respond_to do |format|
-        format.html { redirect_to talks_path, notice: 'Talk was successfully destroyed.' }
-        format.json { head :no_content }
-      end
+      redirect_to talks_path, notice: 'Talk was successfully destroyed.'
     end
   end
 
