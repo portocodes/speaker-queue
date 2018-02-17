@@ -1,7 +1,7 @@
 {
   "name": "speaker-queue",
   "scripts": {
-    "postdeploy": "bin/setup"
+    "postdeploy": "bin/rails db:migrate db:seed"
   },
   "env": {
     "STATELESS_TOKEN_SECRET": {
