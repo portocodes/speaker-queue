@@ -1,0 +1,21 @@
+{
+  "name": "speaker-queue",
+  "scripts": {
+    "postdeploy": "bin/setup"
+  },
+  "env": {
+    "STATELESS_TOKEN_SECRET": {
+      "generator": "secret"
+    }
+  },
+  "formation": {
+  },
+  "addons": [
+
+  ],
+  "buildpacks": [
+    {
+      "url": "heroku/ruby"
+    }
+  ]
+}
