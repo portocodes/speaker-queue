@@ -4,14 +4,14 @@
     "postdeploy": "bin/rails db:migrate db:seed"
   },
   "env": {
-    "STATELESS_TOKEN_SECRET": {
-      "generator": "secret"
-    }
+    "STATELESS_TOKEN_SECRET": { "generator": "secret" },
+    "SMTP_ADDRESS": { "required": true },
+    "SMTP_USERNAME": { "required": true },
+    "SMTP_PASSWORD": { "required": true }
   },
   "formation": {
   },
   "addons": [
-
   ],
   "buildpacks": [
     {
