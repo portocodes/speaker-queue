@@ -65,19 +65,4 @@
       <% end %>
     <% end %>
   </div>
-
 </div>
-
-<!-- to allow dropdown to work after being used -->
-<script>
-  $(document).ready(function() {
-    $(".dropdown-toggle").dropdown();
-  });
-
-  $(window).scroll(function (event) {
-      var scroll = $(window).scrollTop();
-      if (scroll > 100) $(".dropdown-toggle").addClass("scrolled");
-      else              $(".dropdown-toggle").removeClass("scrolled");
-      console.log(1);
-  });
-</script>

@@ -14,7 +14,7 @@ class SessionsController < ApplicationController
     if email
       user = User.where(email: email).first_or_create
       session[:user_id] = user.id
-      redirect_to root_path, notice: "Logged In as a #{user.role}"
+      redirect_to root_path, notice: "Welcome back!"
     else
       flash.now.alert = "Token is invalid"
       render 'new'

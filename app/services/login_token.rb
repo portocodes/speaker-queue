@@ -1,6 +1,6 @@
 class LoginToken
   def self.generate email
-    payload = JSON.dump(e: email, ts: 1.day.from_now.utc.to_i)
+    payload = JSON.dump(e: email, ts: 30.minutes.from_now.utc.to_i)
     StatelessToken.new.encode(payload)
   end
 

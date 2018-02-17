@@ -1,69 +1,43 @@
 <div class="col-lg-12 col-md-11">
-  <% if @approved_talks.any? %>
-    <h2>Scheduled talks</h2>
-
+  <h2>Proposed talks</h2>
+  <% if @proposed_talks.any? %>
     <table class="table table-bordered table-striped">
-      <thead>
-        <tr>
-          <th class="col-md-4">Title</th>
-          <th class="col-md-3">Speaker</th>
-          <th class="col-md-2">Duration</th>
-          <th class="col-md-3">Tag List</th>
-        </tr>
-      </thead>
-
       <tbody>
-        <% @approved_talks.each do |talk| %>
+        <% @proposed_talks.each do |talk| %>
           <tr>
-            <td><%= link_to talk.title, talk_path(talk.id) %></td>
-            <td><%= talk.user.name %></td>
-            <td><%= talk.duration %> minutes</td>
-
             <td>
-              <span class="tag-color">
-                <% talk.tag_list.each do |tag| %>
-                  <%= link_to tag, "#" %>
-                <% end %>
-              </span>
+              <%= link_to talk.title, talk %>
+              &mdash; <%= t "kind_#{talk.kind}", scope: 'activerecord.attributes.talk' %>,
+              by <%= talk.user.name %>
             </td>
           </tr>
           <tr>
-            <td colspan="4"><%= simple_format talk.description %></td>
+            <td><%= simple_format talk.description %></td>
           </tr>
         <% end %>
       </tbody>
     </table>
-  <% end %>
-
-  <h2>Pending talks</h2>
-
-  <% if @pending_talks.empty? %>
-    <p>No talks :( <%= link_to 'Submit one', new_talk_path %></p>
   <% else %>
+    <p>No talks :( <%= link_to 'Submit one', new_talk_path %></p>
+  <% end %>
+
+  <h2>Past talks</h2>
+  <% if @presented_talks.empty? %>
     <table class="table table-bordered table-striped">
       <thead>
         <tr>
           <th class="col-md-4">Title</th>
           <th class="col-md-3">Speaker</th>
           <th class="col-md-2">Duration</th>
-          <th class="col-md-3">Tag List</th>
         </tr>
       </thead>
 
       <tbody>
-        <% @pending_talks.each do |talk| %>
+        <% @presented_talks.each do |talk| %>
           <tr>
             <td><%= link_to talk.title, talk_path(talk.id) %></td>
             <td><%= talk.user.name %></td>
-            <td><%= talk.duration %> minutes</td>
-
-            <td>
-              <span class="tag-color">
-                <% talk.tag_list.each do |tag| %>
-                  <%= link_to tag, "#" %>
-                <% end %>
-              </span>
-            </td>
+            <td><%= 5 %> minutes</td>
           </tr>
           <tr>
             <td colspan="4"><%= simple_format talk.description %></td>
@@ -72,10 +46,4 @@
       </tbody>
     </table>
   <% end %>
-
-  <div id="tag_cloud">
-    <% tag_cloud Talk.tag_counts, %w[s m l] do |tag, css_class| %>
-      <%= link_to tag.name, tags_path(tag.name), class: css_class %>
-    <% end %>
-  </div>
 </div>

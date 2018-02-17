@@ -1,0 +1,9 @@
+Hello,
+
+<%= @talk.user.name %> proposed a <%= t "kind_#{@talk.kind}", scope: 'activerecord.attributes.talk' %>:
+
+<%= @talk.title %>
+
+<%= @talk.description %>
+
+You can check it on speaker queue: <%= talk_url @talk %>

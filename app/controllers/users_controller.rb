@@ -1,12 +1,13 @@
 class UsersController < ApplicationController
-  def edit
+  def show
     @user = current_user
-    @talks = @user.talks.where(state: 'pending')
   end
 
   def update
+    @user = current_user
+
     respond_to do |format|
-      if current_user.update(user_params)
+      if @user.update(user_params)
         format.html {
           if params[:from] == 'new-talk'
             redirect_to new_talk_path, notice: 'Preferences updated.'

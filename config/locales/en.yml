@@ -21,3 +21,10 @@
 
 en:
   hello: "Hello world"
+
+  activerecord:
+    attributes:
+      talk:
+        kind_full: 30 - 45 minutes talk
+        kind_lightning: 5 - 10 minutes lightning talk
+        kind_workshop: Workshop
