@@ -27,5 +27,9 @@ module SpeakerQueue
       authentication: "plain",
       enable_starttls_auto: true,
     }
+
+    config.action_mailer.default_url_options = {
+      host: ENV["BASE_URL"]&.chomp("/") || "#{ENV["HEROKU_APP_NAME"]}.herokuapp.com",
+    }
   end
 end
