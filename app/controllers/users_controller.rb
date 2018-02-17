@@ -1,9 +1,13 @@
 class UsersController < ApplicationController
   def show
+    authorize User
+
     @user = current_user
   end
 
   def update
+    authorize User
+
     @user = current_user
 
     if @user.update(user_params)

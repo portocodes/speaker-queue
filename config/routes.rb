@@ -3,7 +3,7 @@ Rails.application.routes.draw do
     get :login
   end
 
-  resource :preferences, only: [:show, :patch], controller: :users
+  resource :preferences, only: [:show, :update], controller: :users
 
   resources :talks
 

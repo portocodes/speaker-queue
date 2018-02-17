@@ -1,14 +1,19 @@
 class TalksController < ApplicationController
   def index
+    authorize Talk
+
     @presented_talks = Talk.presented.order(:created_at)
     @proposed_talks = Talk.proposed.order(:created_at)
   end
 
   def show
     @talk = Talk.find(params[:id])
+    authorize @talk
   end
 
   def new
+    authorize Talk
+
     if !current_user
       flash[:notice] = "Please login before submitting a talk"
       redirect_to new_session_path
@@ -21,6 +26,8 @@ class TalksController < ApplicationController
   end
 
   def create
+    authorize Talk
+
     @talk = current_user.talks.new(talk_params)
 
     if @talk.save
@@ -33,15 +40,14 @@ class TalksController < ApplicationController
   end
 
   def edit
-    @talks = Talk.all
-    if current_user.role == "coder" && @talk.state != "pending"
-      redirect_to talks_path, :alert => "You are not authorized to perform that action."
-    else
-      @talk = @talks.find(params[:id])
-    end
+    @talk = Talk.find(params[:id])
+    authorize @talk
   end
 
   def update
+    @talk = Talk.find(params[:id])
+    authorize @talk
+
     if @talk.update(talk_params)
       redirect_to talks_path, notice: 'Talk was successfully updated.'
     else
@@ -50,6 +56,9 @@ class TalksController < ApplicationController
   end
 
   def destroy
+    @talk = Talk.find(params[:id])
+    authorize @talk
+
     if current_user.role == "coder" && @talk.state != "pending"
       redirect_to talks_path, :alert => "You are not authorized to perform that action."
     else
