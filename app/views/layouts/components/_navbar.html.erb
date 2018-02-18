@@ -11,7 +11,9 @@
       <li><%= link_to 'Preferences', preferences_path, class: 'btn btn-primary' %>
       <li>
         <%= form_with url: session_path, method: :delete do |f| %>
-          <%= f.submit "Logout (#{current_user.name || current_user.email})", class: "btn btn-primary" %>
+          <%= f.button class: "btn btn-primary" do %>
+            Logout <span class="navbar__current_user">(<%= current_user.name || current_user.email %>)</span>
+          <% end %>
         <% end %>
       </li>
     <% else %>
