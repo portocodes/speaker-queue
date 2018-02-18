@@ -29,7 +29,7 @@ module SpeakerQueue
     }
 
     config.action_mailer.default_url_options = {
-      host: ENV["BASE_URL"]&.chomp("/") || "#{ENV["HEROKU_APP_NAME"]}.herokuapp.com",
+      host: ENV["BASE_URL"]&.chomp("/") || "https://#{ENV["HEROKU_APP_NAME"]}.herokuapp.com",
     }
   end
 end

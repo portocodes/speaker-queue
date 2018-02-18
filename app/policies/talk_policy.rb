@@ -7,11 +7,13 @@ class TalkPolicy < Struct.new(:current_user, :talk)
     true
   end
 
+  def new?
+    true
+  end
+
   def create?
     current_user&.name.present?
   end
-
-  alias_method :new?, :create?
 
   def update?
     current_user.admin? || talk.user == current_user
