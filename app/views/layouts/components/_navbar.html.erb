@@ -1,11 +1,23 @@
-<nav class="navbar navbar-default">
-  <div class="navbar-header">
-    <%= link_to root_path, class: 'navbar-brand' do %>
-      <%= image_tag "logo.svg", alt: "Porto Codes", class: "img-responsive" %>
-    <% end %>
+<nav class="navbar">
+  <%= link_to root_path, class: 'navbar__brand' do %>
+    <%= image_tag "logo.svg", alt: "Porto Codes", class: "img-responsive" %>
+  <% end %>
 
-    <div class="collapse navbar-collapse profile">
-      <%= render 'layouts/components/nav_profile' %>
-    </div>
-  </div>
+  <ul class="navbar__profile">
+    <li><%= link_to 'Talks', talks_path, class: 'btn btn-primary' %></li>
+    <li><%= link_to 'Submit Talk', new_talk_path, class: 'btn btn-primary' %></li>
+
+    <% if current_user %>
+      <li><%= link_to 'Profile', preferences_path, class: 'btn btn-primary' %>
+      <li>
+        <%= form_with url: session_path, method: :delete do |f| %>
+          <%= f.button class: "btn btn-primary" do %>
+            Logout <span class="navbar__current_user">(<%= current_user.name || current_user.email %>)</span>
+          <% end %>
+        <% end %>
+      </li>
+    <% else %>
+      <li><%= link_to 'Login', new_session_path, class: "btn btn-primary" %></li>
+    <% end %>
+  </ul>
 </nav>

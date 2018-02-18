@@ -1,37 +1,16 @@
 <div class="col-lg-9 col-md-11">
   <h2>
     <%= @talk.title %>
-      <small>
-        <%= @talk.time_event %>
-          <span class="hidden-xs hidden-ms">.
-            <a href="<%= @talk.location_coordinates %>" target="_blank" class="brand-tooltip" data-toggle="tooltip" data-placement="right" title="<%= @talk.location_name %>">Where?</a>
-          </span>
-          <a href="<%= @talk.location_coordinates %>" target="_blank"  class="visible-xs visible-ms"><i class="fa fa-map-marker"></i><%= @talk.location_name %></a>
-      </small>
   </h2>
-    <%= simple_format @talk.description %>
-    <ul class="list-unstyled @talk-details">
-      <li>
-        <strong>Duration:</strong>
-          <%= @talk.duration %> minutes
-      </li>
-      <li>
-        <strong>Speaker:</strong>
-          <%= @talk.user.name %>
-      </li>
-      <% if @talk.tag_list %>
-        <li class="tag-list">
-          <strong>Tags:</strong>
-            <%= raw @talk.tag_list.map { |t| link_to t, tag_path(t) }.join('&nbsp;&nbsp;|&nbsp;&nbsp;') %>
-        </li>
-      <% end %>
-    </ul>
-    <% if @talk.video or @talk.resource %><hr><% end %>
-    <% if @talk.video %>
-      <a href="<%= @talk.video %>" target="_blank" class="btn btn-primary icon icon-video"><span></span> Watch video</a>
-    <% end %>
-    <% if @talk.resource %>
-      <a href="<%= @talk.resource %>" target="_blank" class="btn btn-primary icon icon-download"><span></span> Download</a>
-    <% end %>
-    <%= link_to '<i class="fa fa-undo" aria-hidden="true"></i> Back'.html_safe, talks_path, class: 'btn btn-primary' %>
+
+  <p>
+    <%= t "kind_#{@talk.kind}", scope: 'activerecord.attributes.talk' %>,
+    by <%= @talk.user.name %>
+  </p>
+
+  <%= simple_format @talk.description %>
+
+  <%= link_to talks_path, class: 'btn btn-primary' do %>
+    <i class="fa fa-undo" aria-hidden="true"></i> Back
+  <% end %>
 </div>

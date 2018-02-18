@@ -10,13 +10,13 @@
 <div class="container">
   <h2>Submitted talks</h2>
 
-  <% if @talks.empty? %>
+  <% if @user.talks.empty? %>
     <p>
       You haven't submitted any talks yet :(
       <%= link_to 'Submit a talk', new_talk_path, class: 'btn btn-primary' %>
     </p>
   <% else %>
-    <% @talks.each do |talk| %>
+    <% @user.talks.each do |talk| %>
       <p><%= link_to talk.title, talk %></p>
     <% end %>
   <% end %>

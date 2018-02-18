@@ -1,6 +1,10 @@
 language: ruby
-script:
-- bundle exec rake db:test:prepare
+services:
+  - postgresql
+before_script:
+  - createdb -U postgres speakerqueue_test
+env:
+  - DATABASE_URL=postgres://postgres@localhost/speakerqueue_test
 addons:
   code_climate:
     repo_token: ENV['CODECLIMATE_REPO_TOKEN']

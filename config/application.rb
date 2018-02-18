@@ -19,6 +19,17 @@ module SpeakerQueue
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
-    config.autoload_paths << "#{Rails.root}/app/services"
+    config.action_mailer.smtp_settings = {
+      user_name: ENV['SMTP_USERNAME'],
+      password: ENV['SMTP_PASSWORD'],
+      address: ENV['SMTP_ADDRESS'],
+      port: 587,
+      authentication: "plain",
+      enable_starttls_auto: true,
+    }
+
+    config.action_mailer.default_url_options = {
+      host: ENV["BASE_URL"]&.chomp("/") || "https://#{ENV["HEROKU_APP_NAME"]}.herokuapp.com",
+    }
   end
 end

@@ -1,5 +1,5 @@
 <% if current_user %>
-  <ul class="nav navbar-nav logged-in">
+  <ul>
     <li>
       <a href="<%= preferences_path %>"
          class="profile-image"
@@ -7,16 +7,18 @@
       <div>
         <span>
           <span><%= current_user.name || current_user.email %></span>
-          <%= link_to 'Logout', logout_path, class: "logout" %>
+          <%= link_to 'Logout', session_path, method: :delete, class: "logout" %>
         </span>
       </div>
-      <%= link_to 'Preferences', preferences_path, class: 'btn btn-primary' %>
-      <%= link_to 'Submit Talk', new_talk_path, class: 'btn btn-primary' %>
+    </li>
+      <li><%= link_to 'Preferences', preferences_path, class: 'btn btn-primary' %>
+    </li>
+      <li><%= link_to 'Submit Talk', new_talk_path, class: 'btn btn-primary' %>
     </li>
   </ul>
 <% else %>
   <ul class= "nav navbar-nav logged-out">
     <li><%= link_to 'Submit Talk', new_talk_path, :class => 'btn btn-primary' %></li>
-    <li><%= link_to "Log In", login_path %></li>
+    <li><%= link_to "Log In", new_session_path %></li>
   </ul>
 <% end %>

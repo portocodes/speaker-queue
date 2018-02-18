@@ -1,13 +1,12 @@
 class TalkMailer < ActionMailer::Base
+  default from: "speakerqueue@porto.codes"
 
-  def talk_created(user)
-    @user = user
-    #last talk created is the new talk for the current user
-    @talk = @user.talks.last
+  def talk_created(talk)
+    @talk = talk
+
     mail(
-      to: user.email,
-      from: "someone@somedomain.com", #if using GMAIL this line isn't read. with other providers this is considered.
-      subject: "New Talk Created"
+      to: User.admins.pluck(:email),
+      subject: "[speakerqueue] #{talk.user.name} proposed a talk"
     )
   end
 end

@@ -1,24 +1,23 @@
 class UsersController < ApplicationController
-  def edit
+  def show
+    authorize User
+
     @user = current_user
-    @talks = @user.talks.where(state: 'pending')
   end
 
   def update
-    respond_to do |format|
-      if current_user.update(user_params)
-        format.html {
-          if params[:from] == 'new-talk'
-            redirect_to new_talk_path, notice: 'Preferences updated.'
-          else
-            redirect_to root_path, notice: 'Preferences updated.'
-          end
-        }
-        format.json { render :show, status: :ok, location: @user }
+    authorize User
+
+    @user = current_user
+
+    if @user.update(user_params)
+      if params[:from] == 'new-talk'
+        redirect_to new_talk_path, notice: 'Preferences updated.'
       else
-        format.html { render :edit }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
+        redirect_to root_path, notice: 'Preferences updated.'
       end
+    else
+      render :edit
     end
   end
 

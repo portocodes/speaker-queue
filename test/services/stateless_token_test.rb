@@ -8,7 +8,6 @@ class StatelessTokenTest < ActiveSupport::TestCase
   test "roundtrip" do
     t = StatelessToken.new("abracadabra")
 
-
     assert_equal @payload, t.decode(t.encode(@payload))
   end
 
