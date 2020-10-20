@@ -2,12 +2,12 @@ source "https://rubygems.org"
 
 ruby `cat .ruby-version`
 
-gem "rails", "5.1.4"
+gem "rails"
 gem "pg"
 gem "pundit"
 
-gem "sass-rails", "~> 5.0"
-gem "bootstrap-sass", "~> 3.3.6"
+gem "sass-rails"
+gem "bootstrap-sass"
 
 group :development do
   gem "web-console"
